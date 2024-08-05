@@ -43,7 +43,7 @@ const SiteHeader = () => {
     { name: "Real Estate", slug: "/home-2" },
     { name: "Booking", slug: "/home-3" },
   ]);
-  const [headerSelected, setHeaderSelected] = useState<SiteHeaders>("Header 2");
+  const [headerSelected, setHeaderSelected] = useState<SiteHeaders>("Header 1");
 
   const [isTopOfPage, setIsTopOfPage] = useState(true);
 
@@ -191,7 +191,7 @@ const SiteHeader = () => {
 
   return (
     <>
-      {renderControlSelections()}
+      {/* {renderControlSelections()} */}
       {renderHeader()}
       <div ref={anchorRef} className="h-1 absolute invisible"></div>
     </>
