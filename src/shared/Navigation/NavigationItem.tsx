@@ -259,7 +259,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
         href={item.href || "/"}
       >
         {item.name}
-        {item.type && (
+        {item.type !== "none" && (
           <ChevronDownIcon
             className="ml-1 -mr-1 h-4 w-4 text-neutral-400"
             aria-hidden="true"

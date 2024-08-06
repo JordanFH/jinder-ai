@@ -283,6 +283,15 @@ export const NAVIGATION_DEMO: NavItemType[] = [
   },
 ];
 
+export const NAVIGATION: NavItemType[] = [
+  {
+    id: ncNanoId(),
+    href: "/",
+    name: "Home",
+    type: "none",
+  },
+];
+
 export const NAVIGATION_DEMO_2: NavItemType[] = [
   {
     id: ncNanoId(),
