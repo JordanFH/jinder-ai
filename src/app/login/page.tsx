@@ -27,7 +27,9 @@ const loginSocials = [
   // },
   {
     name: "Continue with Google",
-    click: () => signIn("google"),
+    click: () => signIn("google", {
+      callbackUrl: "/explore",
+    }),
     icon: googleSvg,
   },
 ];

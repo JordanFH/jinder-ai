@@ -42,7 +42,7 @@ const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
               <SwitchDarkMode />
               <div className="px-1" />
             </div>
-            {user && user !== undefined ? (
+            {user ? (
               <AvatarDropdown user={user} />
             ) : (
               <ButtonPrimary className="self-center" href="/login">
