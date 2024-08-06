@@ -7,6 +7,7 @@ import MenuBar from "@/shared/MenuBar";
 import SwitchDarkMode from "@/shared/SwitchDarkMode";
 import HeroSearchForm2MobileFactory from "../(HeroSearchForm2Mobile)/HeroSearchForm2MobileFactory";
 import LangDropdown from "./LangDropdown";
+import AvatarDropdown from "./AvatarDropdown";
 
 export interface MainNav1Props {
   className?: string;
@@ -35,6 +36,7 @@ const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
             <ButtonPrimary className="self-center" href="/login">
               Sign In
             </ButtonPrimary>
+            <AvatarDropdown />
             <div className="md:hidden flex">
               <div className="px-0.5" />
               <MenuBar />
