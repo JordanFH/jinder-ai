@@ -32,7 +32,7 @@ const NextPrev: FC<NextPrevProps> = ({
         <button
           className={`${btnClassName} ${
             !onlyPrev ? "mr-[6px]" : ""
-          } bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-6000 dark:hover:border-neutral-500 rounded-full flex items-center justify-center hover:border-neutral-300 ${twFocusClass()}`}
+          } bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-600 dark:hover:border-neutral-500 rounded-full flex items-center justify-center hover:border-neutral-300 ${twFocusClass()}`}
           onClick={onClickPrev}
           title="Prev"
           data-glide-dir="<"
@@ -42,7 +42,7 @@ const NextPrev: FC<NextPrevProps> = ({
       )}
       {!onlyPrev && (
         <button
-          className={`${btnClassName} bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-6000 dark:hover:border-neutral-500 rounded-full flex items-center justify-center hover:border-neutral-300 ${twFocusClass()}`}
+          className={`${btnClassName} bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-600 dark:hover:border-neutral-500 rounded-full flex items-center justify-center hover:border-neutral-300 ${twFocusClass()}`}
           onClick={onClickNext}
           title="Next"
           data-glide-dir=">"

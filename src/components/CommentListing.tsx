@@ -68,7 +68,7 @@ const CommentListing: FC<CommentListingProps> = ({
             <StarIcon className="w-4 h-4" />
           </div>
         </div>
-        <span className="block mt-3 text-neutral-6000 dark:text-neutral-300">
+        <span className="block mt-3 text-neutral-600 dark:text-neutral-300">
           {data.comment}
         </span>
       </div>

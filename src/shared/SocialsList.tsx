@@ -21,7 +21,7 @@ const SocialsList: FC<SocialsListProps> = ({
 }) => {
   return (
     <nav
-      className={`nc-SocialsList flex space-x-2.5 text-2xl text-neutral-6000 dark:text-neutral-300 ${className}`}
+      className={`nc-SocialsList flex space-x-2.5 text-2xl text-neutral-600 dark:text-neutral-300 ${className}`}
       data-nc-id="SocialsList"
     >
       {socials.map((item, i) => (

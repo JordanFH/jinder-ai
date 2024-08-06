@@ -118,7 +118,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
       <div className="listingSection__wrap">
         <h2 className="text-2xl font-semibold">Stay information</h2>
         <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-        <div className="text-neutral-6000 dark:text-neutral-300">
+        <div className="text-neutral-600 dark:text-neutral-300">
           <span>
             Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides
             accommodation, an outdoor swimming pool, a bar, a shared lounge, a
@@ -230,7 +230,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                         className="flex items-center py-2.5 sm:py-4 lg:py-5 space-x-5 lg:space-x-8"
                       >
                         <i
-                          className={`text-4xl text-neutral-6000 las ${item.icon}`}
+                          className={`text-4xl text-neutral-600 las ${item.icon}`}
                         ></i>
                         <span>{item.name}</span>
                       </div>
@@ -258,7 +258,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
         {/* CONTENT */}
         <div className="flow-root">
-          <div className="text-sm sm:text-base text-neutral-6000 dark:text-neutral-300 -mb-4">
+          <div className="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 -mb-4">
             <div className="p-4 bg-neutral-100 dark:bg-neutral-800 flex justify-between items-center space-x-4 rounded-lg">
               <span>Monday - Thursday</span>
               <span>$199</span>
@@ -317,7 +317,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         </div>
 
         {/* desc */}
-        <span className="block text-neutral-6000 dark:text-neutral-300">
+        <span className="block text-neutral-600 dark:text-neutral-300">
           Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides
           accommodation, an outdoor swimming pool, a bar, a shared lounge, a
           garden and barbecue facilities...
@@ -534,11 +534,11 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
 
         {/* SUM */}
         <div className="flex flex-col space-y-4">
-          <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
+          <div className="flex justify-between text-neutral-600 dark:text-neutral-300">
             <span>$119 x 3 night</span>
             <span>$357</span>
           </div>
-          <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
+          <div className="flex justify-between text-neutral-600 dark:text-neutral-300">
             <span>Service charge</span>
             <span>$0</span>
           </div>

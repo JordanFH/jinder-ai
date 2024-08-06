@@ -171,7 +171,7 @@ const FlightCard: FC<FlightCardProps> = ({ className = "", data }) => {
           {/* PRICE */}
           <div className="flex-[4] whitespace-nowrap sm:text-right">
             <div>
-              <span className="text-xl font-semibold text-secondary-6000">
+              <span className="text-xl font-semibold text-secondary-600">
                 {data.price}
               </span>
             </div>

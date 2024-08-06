@@ -71,7 +71,7 @@ const Footer: React.FC = () => {
             <li key={index}>
               <a
                 key={index}
-                className="text-neutral-6000 dark:text-neutral-300 hover:text-black dark:hover:text-white"
+                className="text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white"
                 href={item.href}
               >
                 {item.label}

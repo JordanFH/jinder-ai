@@ -104,7 +104,7 @@ const TabFilters = () => {
         {({ open, close }) => (
           <>
             <Popover.Button
-              className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-6000 focus:outline-none ${
+              className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-600 focus:outline-none ${
                 open ? "!border-primary-500 " : ""
               }`}
             >
@@ -159,7 +159,7 @@ const TabFilters = () => {
         {({ open, close }) => (
           <>
             <Popover.Button
-              className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-6000 focus:outline-none ${
+              className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-600 focus:outline-none ${
                 open ? "!border-primary-500 " : ""
               }`}
             >

@@ -163,19 +163,19 @@ const Page = ({
     return (
       <div className="max-w-screen-md mx-auto flex flex-wrap">
         <a
-          className="nc-Tag inline-block bg-white text-sm text-neutral-600 dark:text-neutral-300 py-2 rounded-lg border border-neutral-100  md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
+          className="nc-Tag inline-block bg-white text-sm text-neutral-600 dark:text-neutral-300 py-2 rounded-lg border border-neutral-100  md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-600 mr-2 mb-2"
           href="##"
         >
           Garden
         </a>
         <a
-          className="nc-Tag inline-block bg-white text-sm text-neutral-600 dark:text-neutral-300 py-2 rounded-lg border border-neutral-100  md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
+          className="nc-Tag inline-block bg-white text-sm text-neutral-600 dark:text-neutral-300 py-2 rounded-lg border border-neutral-100  md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-600 mr-2 mb-2"
           href="##"
         >
           Jewelry
         </a>
         <a
-          className="nc-Tag inline-block bg-white text-sm text-neutral-600 dark:text-neutral-300 py-2 rounded-lg border border-neutral-100  md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
+          className="nc-Tag inline-block bg-white text-sm text-neutral-600 dark:text-neutral-300 py-2 rounded-lg border border-neutral-100  md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-600 mr-2 mb-2"
           href="##"
         >
           Tools
@@ -199,7 +199,7 @@ const Page = ({
             <span className="text-sm text-neutral-500 sm:text-base dark:text-neutral-300">
               There’s no stopping the tech giant. Apple now opens its 100th
               store in China.There’s no stopping the tech giant.
-              <a className="text-primary-6000 font-medium ml-1" href="/">
+              <a className="text-primary-600 font-medium ml-1" href="/">
                 Readmore
               </a>
             </span>

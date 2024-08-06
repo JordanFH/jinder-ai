@@ -98,7 +98,7 @@ const Header3: FC<Header3Props> = ({ className = "" }) => {
   const renderButtonOpenHeroSearch = () => {
     return (
       <div
-        className={`w-full relative flex items-center justify-between border border-neutral-200 dark:border-neutral-6000 rounded-full shadow hover:shadow-md transition-all ${
+        className={`w-full relative flex items-center justify-between border border-neutral-200 dark:border-neutral-600 rounded-full shadow hover:shadow-md transition-all ${
           showHeroSearch
             ? "-translate-x-0 translate-y-20 scale-x-[2.55] scale-y-[1.8] opacity-0 pointer-events-none invisible"
             : "visible"
@@ -133,7 +133,7 @@ const Header3: FC<Header3Props> = ({ className = "" }) => {
           className="flex-shrink-0 ml-auto pr-2 cursor-pointer"
           onClick={() => setShowHeroSearch("location")}
         >
-          <span className="w-8 h-8 flex items-center justify-center rounded-full bg-primary-6000  text-white">
+          <span className="w-8 h-8 flex items-center justify-center rounded-full bg-primary-600  text-white">
             <MagnifyingGlassIcon className="w-5 h-5" />
           </span>
         </div>

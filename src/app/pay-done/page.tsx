@@ -48,7 +48,7 @@ const PayPage: FC<PayPageProps> = () => {
           <div className="mt-6 border border-neutral-200 dark:border-neutral-700 rounded-3xl flex flex-col sm:flex-row divide-y sm:divide-x sm:divide-y-0 divide-neutral-200 dark:divide-neutral-700">
             <div className="flex-1 p-5 flex space-x-4">
               <svg
-                className="w-8 h-8 text-neutral-300 dark:text-neutral-6000"
+                className="w-8 h-8 text-neutral-300 dark:text-neutral-600"
                 viewBox="0 0 28 28"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +71,7 @@ const PayPage: FC<PayPageProps> = () => {
             </div>
             <div className="flex-1 p-5 flex space-x-4">
               <svg
-                className="w-8 h-8 text-neutral-300 dark:text-neutral-6000"
+                className="w-8 h-8 text-neutral-300 dark:text-neutral-600"
                 viewBox="0 0 28 28"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -97,25 +97,25 @@ const PayPage: FC<PayPageProps> = () => {
         <div className="space-y-6">
           <h3 className="text-2xl font-semibold">Booking detail</h3>
           <div className="flex flex-col space-y-4">
-            <div className="flex text-neutral-6000 dark:text-neutral-300">
+            <div className="flex text-neutral-600 dark:text-neutral-300">
               <span className="flex-1">Booking code</span>
               <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
                 #222-333-111
               </span>
             </div>
-            <div className="flex text-neutral-6000 dark:text-neutral-300">
+            <div className="flex text-neutral-600 dark:text-neutral-300">
               <span className="flex-1">Date</span>
               <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
                 12 Aug, 2021
               </span>
             </div>
-            <div className="flex text-neutral-6000 dark:text-neutral-300">
+            <div className="flex text-neutral-600 dark:text-neutral-300">
               <span className="flex-1">Total</span>
               <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
                 $199
               </span>
             </div>
-            <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
+            <div className="flex justify-between text-neutral-600 dark:text-neutral-300">
               <span className="flex-1">Payment method</span>
               <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
                 Credit card

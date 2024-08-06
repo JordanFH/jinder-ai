@@ -38,7 +38,7 @@ const PostCardMeta: FC<PostCardMetaProps> = ({
             userName={author.displayName}
           />
         )}
-        <span className="block text-neutral-6000 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">
+        <span className="block text-neutral-600 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">
           {author.displayName}
         </span>
       </Link>

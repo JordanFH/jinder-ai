@@ -34,7 +34,7 @@ const SectionDowloadApp = () => {
         <h2 className="text-5xl md:text-6xl xl:text-7xl font-bold text-neutral-800">
           Mobile Apps
         </h2>
-        <span className="block mt-7 max-w-md text-neutral-6000">
+        <span className="block mt-7 max-w-md text-neutral-600">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus
           porttitor nisl, sit amet finibus libero.
         </span>

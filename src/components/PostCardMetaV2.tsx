@@ -45,7 +45,7 @@ const PostCardMetaV2: FC<PostCardMetaV2Props> = ({
           </h2>
 
           <div className="flex mt-1.5">
-            <span className="block text-neutral-6000 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">
+            <span className="block text-neutral-600 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">
               {author.displayName}
             </span>
             <span className="text-neutral-500 dark:text-neutral-400 mx-[6px] font-medium">

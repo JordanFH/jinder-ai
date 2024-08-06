@@ -67,11 +67,11 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
         </div>
         <div className="flex flex-col space-y-4">
           <h3 className="text-2xl font-semibold">Price detail</h3>
-          <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
+          <div className="flex justify-between text-neutral-600 dark:text-neutral-300">
             <span>$19 x 3 day</span>
             <span>$57</span>
           </div>
-          <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
+          <div className="flex justify-between text-neutral-600 dark:text-neutral-300">
             <span>Service charge</span>
             <span>$0</span>
           </div>
@@ -123,7 +123,7 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
                       {converSelectedDateToString([startDate, endDate])}
                     </span>
                   </div>
-                  <PencilSquareIcon className="w-6 h-6 text-neutral-6000 dark:text-neutral-400" />
+                  <PencilSquareIcon className="w-6 h-6 text-neutral-600 dark:text-neutral-400" />
                 </button>
               )}
             />
@@ -146,7 +146,7 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
                       </span>
                     </span>
                   </div>
-                  <PencilSquareIcon className="w-6 h-6 text-neutral-6000 dark:text-neutral-400" />
+                  <PencilSquareIcon className="w-6 h-6 text-neutral-600 dark:text-neutral-400" />
                 </button>
               )}
             />
@@ -166,7 +166,7 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
                       className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${
                         selected
                           ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
-                          : "text-neutral-6000 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                          : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
                       }`}
                     >
                       Paypal
@@ -179,7 +179,7 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
                       className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${
                         selected
                           ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
-                          : " text-neutral-6000 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                          : " text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
                       }`}
                     >
                       <span className="mr-2.5">Credit card</span>

@@ -134,7 +134,7 @@ const SiteHeader = () => {
             {({ open }) => (
               <>
                 <Popover.Button
-                  className={`p-2.5 bg-white hover:bg-neutral-100 dark:bg-primary-6000 dark:hover:bg-primary-700 rounded-xl shadow-xl border border-neutral-200 dark:border-primary-6000 z-10 focus:outline-none ${
+                  className={`p-2.5 bg-white hover:bg-neutral-100 dark:bg-primary-600 dark:hover:bg-primary-700 rounded-xl shadow-xl border border-neutral-200 dark:border-primary-600 z-10 focus:outline-none ${
                     open ? " focus:ring-2 ring-primary-500" : ""
                   }`}
                 >

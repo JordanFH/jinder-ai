@@ -39,7 +39,7 @@ const CardCategory5: FC<CardCategory5Props> = ({
           {name}
         </h2>
         <span
-          className={`block mt-2 text-sm text-neutral-6000 dark:text-neutral-400`}
+          className={`block mt-2 text-sm text-neutral-600 dark:text-neutral-400`}
         >
           {convertNumbThousand(count)} properties
         </span>

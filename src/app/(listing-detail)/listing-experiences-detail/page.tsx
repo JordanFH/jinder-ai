@@ -94,7 +94,7 @@ const ListingExperiencesDetailPage: FC<
       <div className="listingSection__wrap">
         <h2 className="text-2xl font-semibold">Experiences descriptions</h2>
         <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-        <div className="text-neutral-6000 dark:text-neutral-300">
+        <div className="text-neutral-600 dark:text-neutral-300">
           <p>
             TRANG AN BOAT TOUR & MUA CAVE CLIMBING TOUR FROM HANOI
             <br />
@@ -195,7 +195,7 @@ const ListingExperiencesDetailPage: FC<
         </div>
 
         {/* desc */}
-        <span className="block text-neutral-6000 dark:text-neutral-300">
+        <span className="block text-neutral-600 dark:text-neutral-300">
           Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides
           accommodation, an outdoor swimming pool, a bar, a shared lounge, a
           garden and barbecue facilities...
@@ -402,11 +402,11 @@ const ListingExperiencesDetailPage: FC<
 
         {/* SUM */}
         <div className="flex flex-col space-y-4">
-          <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
+          <div className="flex justify-between text-neutral-600 dark:text-neutral-300">
             <span>$19 x 3 adults</span>
             <span>$57</span>
           </div>
-          <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
+          <div className="flex justify-between text-neutral-600 dark:text-neutral-300">
             <span>Service charge</span>
             <span>$0</span>
           </div>

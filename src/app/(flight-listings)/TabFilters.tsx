@@ -124,7 +124,7 @@ const TabFilters = () => {
                     "bg-neutral-50 dark:bg-neutral-900 rounded-xl p-3 space-y-8 focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60"
                   }
                 >
-                  <span className=" text-neutral-6000 dark:text-neutral-300 text-sm">
+                  <span className=" text-neutral-600 dark:text-neutral-300 text-sm">
                     {idx ? " Tokyo to Singapore" : " Singapore to Tokyo"}
                   </span>
                   <div></div>

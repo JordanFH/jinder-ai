@@ -19,7 +19,7 @@ const PageAddListing7: FC<PageAddListing7Props> = () => {
         <div>
           <span className="text-lg font-semibold">Cover image</span>
           <div className="mt-5 ">
-            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-neutral-300 dark:border-neutral-6000 border-dashed rounded-md">
+            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-neutral-300 dark:border-neutral-600 border-dashed rounded-md">
               <div className="space-y-1 text-center">
                 <svg
                   className="mx-auto h-12 w-12 text-neutral-400"
@@ -35,10 +35,10 @@ const PageAddListing7: FC<PageAddListing7Props> = () => {
                     strokeLinejoin="round"
                   ></path>
                 </svg>
-                <div className="flex text-sm text-neutral-6000 dark:text-neutral-300">
+                <div className="flex text-sm text-neutral-600 dark:text-neutral-300">
                   <label
                     htmlFor="file-upload"
-                    className="relative cursor-pointer  rounded-md font-medium text-primary-6000 hover:text-primary-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary-500"
+                    className="relative cursor-pointer  rounded-md font-medium text-primary-600 hover:text-primary-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary-500"
                   >
                     <span>Upload a file</span>
                     <input
@@ -61,7 +61,7 @@ const PageAddListing7: FC<PageAddListing7Props> = () => {
         <div>
           <span className="text-lg font-semibold">Pictures of the place</span>
           <div className="mt-5 ">
-            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-neutral-300 dark:border-neutral-6000 border-dashed rounded-md">
+            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-neutral-300 dark:border-neutral-600 border-dashed rounded-md">
               <div className="space-y-1 text-center">
                 <svg
                   className="mx-auto h-12 w-12 text-neutral-400"
@@ -77,10 +77,10 @@ const PageAddListing7: FC<PageAddListing7Props> = () => {
                     strokeLinejoin="round"
                   ></path>
                 </svg>
-                <div className="flex text-sm text-neutral-6000 dark:text-neutral-300">
+                <div className="flex text-sm text-neutral-600 dark:text-neutral-300">
                   <label
                     htmlFor="file-upload-2"
-                    className="relative cursor-pointer  rounded-md font-medium text-primary-6000 hover:text-primary-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary-500"
+                    className="relative cursor-pointer  rounded-md font-medium text-primary-600 hover:text-primary-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary-500"
                   >
                     <span>Upload a file</span>
                     <input
