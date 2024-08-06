@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FC } from "react";
 import Logo from "@/shared/Logo";
 import Navigation from "@/shared/Navigation/Navigation";
@@ -8,12 +10,17 @@ import SwitchDarkMode from "@/shared/SwitchDarkMode";
 import HeroSearchForm2MobileFactory from "../(HeroSearchForm2Mobile)/HeroSearchForm2MobileFactory";
 import LangDropdown from "./LangDropdown";
 import AvatarDropdown from "./AvatarDropdown";
+import { useSession } from "next-auth/react";
 
 export interface MainNav1Props {
   className?: string;
 }
 
 const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
+  const session = useSession();
+
+  const user = session?.data?.user;
+
   return (
     <div className={`nc-MainNav1 relative z-10 ${className}`}>
       <div className="px-4 lg:container h-20 relative flex justify-between">
@@ -35,10 +42,13 @@ const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
               <SwitchDarkMode />
               <div className="px-1" />
             </div>
-            <ButtonPrimary className="self-center" href="/login">
-              Sign In
-            </ButtonPrimary>
-            <AvatarDropdown />
+            {user ? (
+              <AvatarDropdown />
+            ) : (
+              <ButtonPrimary className="self-center" href="/login">
+                Sign In
+              </ButtonPrimary>
+            )}
             <div className="md:hidden flex">
               <div className="px-0.5" />
               <MenuBar />
