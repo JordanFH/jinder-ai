@@ -116,7 +116,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
           <div className="flex justify-between items-center mt-4">
             <SocialsList itemClass="w-9 h-9 flex items-center justify-center rounded-full bg-neutral-100 text-xl dark:bg-neutral-800 dark:text-neutral-300" />
             <span className="block">
-              <SwitchDarkMode className="bg-neutral-100 dark:bg-neutral-800" />
+              {/* <SwitchDarkMode className="bg-neutral-100 dark:bg-neutral-800" /> */}
             </span>
           </div>
         </div>
@@ -127,7 +127,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
       <ul className="flex flex-col py-6 px-2 space-y-1">
         {data.map(_renderItem)}
       </ul>
-      <div className="flex items-center justify-between py-6 px-5">
+      {/* <div className="flex items-center justify-between py-6 px-5">
         <a
           className="inline-block"
           href="https://themeforest.net/item/chisfis-online-booking-nextjs-template/43399526"
@@ -141,7 +141,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
           className="flex"
           panelClassName="z-10 w-screen max-w-[280px] px-4 mb-3 right-3 bottom-full sm:px-0"
         />
-      </div>
+      </div> */}
     </div>
   );
 };
