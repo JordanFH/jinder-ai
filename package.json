@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/firebase-adapter": "^2.4.2",
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.18",
     "@tailwindcss/aspect-ratio": "^0.4.2",
@@ -22,11 +23,13 @@
     "client-only": "^0.0.1",
     "eslint": "8.41.0",
     "eslint-config-next": "^13.4.3",
+    "firebase": "^10.12.5",
+    "firebase-admin": "^12.3.0",
     "framer-motion": "^10.12.16",
     "google-map-react": "^2.2.1",
     "lodash": "^4.17.21",
     "next": "^13.4.3",
-    "next-auth": "^4.23.1",
+    "next-auth": "^4.24.7",
     "rc-slider": "^10.1.1",
     "react": "^18.2.0",
     "react-datepicker": "^4.11.0",
@@ -43,6 +46,5 @@
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.23",
     "tailwindcss": "^3.3.2"
-  },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  }
 }

@@ -7,6 +7,7 @@ import "@/styles/index.scss";
 import "rc-slider/assets/index.css";
 import Footer from "@/components/Footer";
 import FooterNav from "@/components/FooterNav";
+import SessionProvider from "@/providers/SessionProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -14,21 +15,24 @@ const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
   params: any;
 }) {
+
   return (
     <html lang="en" className={poppins.className}>
       <body className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
+      <SessionProvider>
         <ClientCommons />
         <SiteHeader />
         {children}
         <FooterNav />
         <Footer />
+      </SessionProvider>
       </body>
     </html>
   );
