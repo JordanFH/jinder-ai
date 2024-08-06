@@ -9,14 +9,12 @@ import { signOut } from "next-auth/react";
 
 interface Props {
   className?: string;
-  imgUrl?: string;
-  userName?: string;
+  user?: any;
 }
 
 export default function AvatarDropdown({
   className = "",
-  imgUrl = "",
-  userName = "",
+  user,
 }: Props) {
   return (
     <>
@@ -27,8 +25,7 @@ export default function AvatarDropdown({
               className={`self-center w-14 h-14 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}
             >
               <Avatar
-                imgUrl={imgUrl}
-                userName={userName}
+                user={user}
                 sizeClass="w-12 h-12"
               />
             </Popover.Button>
@@ -45,11 +42,15 @@ export default function AvatarDropdown({
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
                     <div className="flex items-center space-x-3">
-                      <Avatar sizeClass="w-12 h-12" />
+                      {/* <Avatar user={user} sizeClass="w-12 h-12" /> */}
 
                       <div className="flex-grow">
-                        <h4 className="font-semibold">Eden Smith</h4>
-                        <p className="text-xs mt-0.5">Los Angeles, CA</p>
+                        <h4 className="font-semibold text-sm">
+                          {user?.name || "John Doe"}
+                        </h4>
+                        <p className="text-xs mt-1">
+                          {user?.email || "example@gmail.com"}
+                        </p>
                       </div>
                     </div>
 

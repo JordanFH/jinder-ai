@@ -11,6 +11,7 @@ export interface AvatarProps {
   userName?: string;
   hasChecked?: boolean;
   hasCheckedClass?: string;
+  user?: any;
 }
 
 const Avatar: FC<AvatarProps> = ({
@@ -21,9 +22,15 @@ const Avatar: FC<AvatarProps> = ({
   userName,
   hasChecked,
   hasCheckedClass = "w-4 h-4 -top-0.5 -right-0.5",
+  user,
 }) => {
-  const url = imgUrl || "";
-  const name = userName || "John Doe";
+  const url = user?.image || imgUrl;
+  const name = user?.name || "John Doe";
+  console.log({
+    url,
+    name,
+  });
+  
   const _setBgColor = (name: string) => {
     const backgroundIndex = Math.floor(
       name.charCodeAt(0) % avatarColors.length
@@ -39,6 +46,8 @@ const Avatar: FC<AvatarProps> = ({
       {url && (
         <Image
           className={`absolute inset-0 w-full h-full object-cover ${radius}`}
+          width={24}
+          height={24}
           src={url}
           alt={name}
         />
