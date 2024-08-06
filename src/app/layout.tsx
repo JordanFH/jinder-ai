@@ -30,7 +30,7 @@ export default async function RootLayout({
         <ClientCommons />
         <SiteHeader />
         {children}
-        <FooterNav />
+        {/* <FooterNav /> */}
         <Footer />
       </SessionProvider>
       </body>
