@@ -4,7 +4,7 @@ import { StayDataType } from "@/data/types";
 import Pagination from "@/shared/Pagination";
 import TabFilters from "./TabFilters";
 import Heading2 from "@/shared/Heading2";
-import PropertyCardH from "@/components/PropertyCardH";
+import StayCard2 from "@/components/StayCard2";
 
 export interface SectionGridFilterCardProps {
   className?: string;
@@ -27,9 +27,9 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
       <div className="mb-8 lg:mb-11">
         <TabFilters />
       </div>
-      <div className="grid grid-cols-1 gap-6 md:gap-8 xl:grid-cols-2 ">
+      <div className="grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {data.map((stay) => (
-          <PropertyCardH key={stay.id} data={stay} />
+          <StayCard2 key={stay.id} data={stay} />
         ))}
       </div>
       <div className="flex mt-16 justify-center items-center">
