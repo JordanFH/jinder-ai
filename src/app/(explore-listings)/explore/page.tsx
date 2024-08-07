@@ -4,7 +4,12 @@ import SectionGridFilterCard from "../SectionGridFilterCard";
 export interface ListingStayPageProps {}
 
 const ListingStayPage: FC<ListingStayPageProps> = () => {
-  return <SectionGridFilterCard className="container pt-10 lg:pt-12 pb-24 lg:pb-28" />;
+  return (
+    <>
+      <SectionGridFilterCard className="container py-10 lg:py-12" />
+      <SectionGridFilterCard className="container py-10 lg:py-12" />
+    </>
+  );
 };
 
 export default ListingStayPage;
