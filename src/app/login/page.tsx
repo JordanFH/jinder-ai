@@ -1,5 +1,3 @@
-"use client";
-
 import React, { FC } from "react";
 import { Metadata } from "next";
 import { APP_NAME } from "@/constants/app";
