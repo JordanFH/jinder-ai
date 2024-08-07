@@ -290,6 +290,12 @@ export const NAVIGATION: NavItemType[] = [
     name: "Home",
     type: "none",
   },
+  {
+    id: ncNanoId(),
+    href: "/explore",
+    name: "Explore",
+    type: "none",
+  },
 ];
 
 export const NAVIGATION_DEMO_2: NavItemType[] = [
