@@ -12,13 +12,13 @@ const AccountPage = () => {
   return (
     <div className="space-y-6 sm:space-y-8">
       {/* HEADING */}
-      <h2 className="text-3xl font-semibold">Account infomation</h2>
+      <h2 className="text-3xl font-semibold">Account information</h2>
       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
       <div className="flex flex-col md:flex-row">
         <div className="flex-shrink-0 flex items-start">
           <div className="relative rounded-full overflow-hidden flex">
             <Avatar sizeClass="w-32 h-32" />
-            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">
+            {/* <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">
               <svg
                 width="30"
                 height="30"
@@ -40,7 +40,7 @@ const AccountPage = () => {
             <input
               type="file"
               className="absolute inset-0 opacity-0 cursor-pointer"
-            />
+            /> */}
           </div>
         </div>
         <div className="flex-grow mt-10 md:mt-0 md:pl-16 max-w-3xl space-y-6">
