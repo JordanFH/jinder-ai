@@ -19,7 +19,7 @@ const SectionBecomeAnAuthor: FC<SectionBecomeAnAuthorProps> = ({
       data-nc-id="SectionBecomeAnAuthor"
     >
       <div className="flex-shrink-0 mb-16 lg:mb-0 lg:mr-10 lg:w-2/5">
-        <Logo className="w-20" />
+        <Logo />
         <h2 className="font-semibold text-3xl sm:text-4xl mt-6 sm:mt-11">
           Why did you choose us?
         </h2>
