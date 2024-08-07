@@ -11,7 +11,7 @@ export interface SectionHeroProps {
 const SectionHero: FC<SectionHeroProps> = ({ className = "" }) => {
   return (
     <div
-      className={`nc-SectionHero flex flex-col-reverse lg:flex-col relative ${className}`}
+      className={`pt-10 lg:pt-16 nc-SectionHero flex flex-col-reverse lg:flex-col relative ${className}`}
     >
       <div className="flex flex-col lg:flex-row lg:items-center">
         <div className="flex-shrink-0 lg:w-1/2 flex flex-col items-start space-y-8 sm:space-y-10 pb-10 lg:pb-14 xl:pr-14 lg:mr-10 xl:mr-0">

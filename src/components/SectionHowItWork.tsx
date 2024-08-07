@@ -44,7 +44,7 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
 }) => {
   return (
     <div
-      className={`nc-SectionHowItWork  ${className}`}
+      className={`lg:pb-16 nc-SectionHowItWork ${className}`}
       data-nc-id="SectionHowItWork"
     >
       <Heading isCenter desc="Keep calm & travel on">
