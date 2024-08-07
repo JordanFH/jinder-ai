@@ -1,3 +1,3 @@
-const APP_NAME = 'Jinder';
+const APP_NAME = 'JinderAI';
 
 export { APP_NAME };
