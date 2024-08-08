@@ -10,16 +10,14 @@ import SwitchDarkMode from "@/shared/SwitchDarkMode";
 import HeroSearchForm2MobileFactory from "../(HeroSearchForm2Mobile)/HeroSearchForm2MobileFactory";
 import LangDropdown from "./LangDropdown";
 import AvatarDropdown from "./AvatarDropdown";
-import { useSession } from "next-auth/react";
+import { useUser } from "@/providers/UserProvider";
 
 export interface MainNav1Props {
   className?: string;
 }
 
 const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
-  const session = useSession();
-
-  const user = session?.data?.user;
+  const user = useUser();
 
   return (
     <div className={`nc-MainNav1 relative z-10 ${className}`}>
@@ -42,7 +40,7 @@ const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
               <SwitchDarkMode />
               <div className="px-1" />
             </div>
-            {user ? (
+            {user.email !== "" ? (
               <AvatarDropdown user={user} />
             ) : (
               <ButtonPrimary className="self-center" href="/login">
