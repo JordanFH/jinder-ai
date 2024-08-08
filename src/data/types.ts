@@ -141,3 +141,10 @@ export interface CarDataType {
     lng: number;
   };
 }
+
+export interface UserType {
+  name: string;
+  email: string;
+  emailVerified: boolean | null;
+  image: string;
+}
