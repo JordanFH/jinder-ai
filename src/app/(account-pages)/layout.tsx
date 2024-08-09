@@ -1,9 +1,16 @@
 import React, { FC } from "react";
 import { Nav } from "./(components)/Nav";
+import { APP_NAME } from "@/constants/app";
+import { Metadata } from "next";
 
 export interface CommonLayoutProps {
   children?: React.ReactNode;
 }
+
+export const metadata: Metadata = {
+  title: `Account - ${APP_NAME}`,
+  description: "Account page",
+};
 
 const CommonLayout: FC<CommonLayoutProps> = ({ children }) => {
   return (
