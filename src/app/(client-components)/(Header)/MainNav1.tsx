@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import Logo from "@/shared/Logo";
 import Navigation from "@/shared/Navigation/Navigation";
 import SearchDropdown from "./SearchDropdown";
@@ -17,7 +17,7 @@ export interface MainNav1Props {
 }
 
 const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
-  const user = useUser();
+  const {userData} = useUser();
 
   return (
     <div className={`nc-MainNav1 relative z-10 ${className}`}>
@@ -40,8 +40,8 @@ const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
               <SwitchDarkMode />
               <div className="px-1" />
             </div>
-            {user.email !== "" ? (
-              <AvatarDropdown user={user} />
+            {userData.personalInformation.email !== "" ? (
+              <AvatarDropdown user={userData.personalInformation} />
             ) : (
               <ButtonPrimary className="self-center" href="/login">
                 Sign In
