@@ -19,12 +19,20 @@ const AccountPage = () => {
           <div className="flex-grow mt-10 md:mt-0 md:pr-16 max-w-3xl space-y-6">
             <div>
               <Label>Name</Label>
-              <Input className="mt-1.5 bg-gray-200 dark:bg-gray-600" defaultValue="" disabled />
+              <Input
+                className="mt-1.5 bg-gray-200 dark:bg-gray-600"
+                defaultValue=""
+                disabled
+              />
             </div>
             {/* ---- */}
             <div>
               <Label>Email</Label>
-              <Input className="mt-1.5 bg-gray-200 dark:bg-gray-600" defaultValue="" disabled />
+              <Input
+                className="mt-1.5 bg-gray-200 dark:bg-gray-600"
+                defaultValue=""
+                disabled
+              />
             </div>
             {/* ---- */}
             <div>
@@ -51,47 +59,27 @@ const AccountPage = () => {
         <div className="flex flex-col md:flex-row">
           <div className="flex-grow mt-10 md:mt-0 md:pr-16 max-w-3xl space-y-6">
             <div>
-              <Label>Name</Label>
-              <Input className="mt-1.5" defaultValue="Eden Tuan" />
+              <Label>Specialty</Label>
+              <Input className="mt-1.5" defaultValue="" />
             </div>
             {/* ---- */}
             <div>
-              <Label>Username</Label>
-              <Input className="mt-1.5" defaultValue="@eden_tuan" />
-            </div>
-            {/* ---- */}
-            <div>
-              <Label>Email</Label>
-              <Input className="mt-1.5" defaultValue="example@email.com" />
+              <Label>Current level</Label>
+              <Select className="mt-1.5">
+                <option value="Junior">Junior</option>
+                <option value="Middle">Middle</option>
+                <option value="Senior">Senior</option>
+              </Select>
             </div>
             {/* ---- */}
             <div className="">
-              <Label>Date of birth</Label>
-              <Input className="mt-1.5" type="date" defaultValue="1990-07-22" />
+              <Label>Years of experience</Label>
+              <Input className="mt-1.5" type="number" defaultValue="" />
             </div>
             {/* ---- */}
             <div>
-              <Label>Addess</Label>
-              <Input className="mt-1.5" defaultValue="New york, USA" />
-            </div>
-            {/* ---- */}
-            <div>
-              <Label>Phone number</Label>
-              <Input className="mt-1.5" defaultValue="003 888 232" />
-            </div>
-            {/* ---- */}
-            <div>
-              <Label>About you</Label>
-              <Textarea className="mt-1.5" defaultValue="..." />
-            </div>
-            {/* ---- */}
-            <div>
-              <Label>Gender</Label>
-              <Select className="mt-1.5">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </Select>
+              <Label>Summary</Label>
+              <Textarea className="mt-1.5" defaultValue="" />
             </div>
           </div>
         </div>
