@@ -20,9 +20,9 @@ export interface SectionVideosProps {
 const VIDEOS_DEMO: VideoType[] = [
   {
     id: "Ao7e4iisKMs",
-    title: "Magical Scotland - 4K Scenic Relaxation Film with Calming Music",
+    title: "JinderAI",
     thumbnail:
-      "https://images.pexels.com/photos/131423/pexels-photo-131423.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "https://drive.google.com/thumbnail?id=19t7ta97sI2LSgfhhCm-qlD42e4-lMBfU&sz=w2560",
   },
   {
     id: "a5V6gdu5ih8",
@@ -86,9 +86,6 @@ const SectionVideos: FC<SectionVideosProps> = ({
               src={video.thumbnail}
               title={video.title}
               alt={video.title}
-              sizes="(max-width: 1000px) 100vw,
-                (max-width: 1200px) 75vw,
-                50vw"
             />
           </>
         )}
@@ -128,20 +125,19 @@ const SectionVideos: FC<SectionVideosProps> = ({
   return (
     <div className={`nc-SectionVideos ${className}`}>
       <Heading
-        desc="Check out our hottest videos. View more and share more new
-          perspectives on just about any topic. Everyone’s welcome."
+        desc="Check out our features. Watch and share new ideas for our app. Everyone is welcome."
       >
-        🎬 The Videos
+        Features
       </Heading>
 
       <div className="flex flex-col relative sm:pr-4 sm:py-4 md:pr-6 md:py-6 xl:pr-14 xl:py-14 lg:flex-row">
         <div className="absolute -top-4 -bottom-4 -right-4 w-2/3 rounded-3xl bg-primary-100 bg-opacity-40 z-0 sm:rounded-[50px] md:top-0 md:bottom-0 md:right-0 xl:w-1/2 dark:bg-neutral-800 dark:bg-opacity-40"></div>
-        <div className="flex-grow relative pb-2 sm:pb-4 lg:pb-0 lg:pr-5 xl:pr-6">
+        <div className="flex-grow relative pb-2 sm:pb-4 lg:pb-0">
           {renderMainVideo()}
         </div>
-        <div className="flex-shrink-0 grid gap-2 grid-cols-4 sm:gap-6 lg:grid-cols-1 lg:w-36 xl:w-40">
+        {/* <div className="flex-shrink-0 grid gap-2 grid-cols-4 sm:gap-6 lg:grid-cols-1 lg:w-36 xl:w-40">
           {videos.map(renderSubVideo)}
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -28,8 +28,8 @@ const SectionBecomeAnAuthor: FC<SectionBecomeAnAuthorProps> = ({
           booking accommodation, resort villas, hotels, private houses,
           apartments... becomes fast, convenient and easy.
         </span>
-        <ButtonPrimary className="mt-6 sm:mt-11">
-          Become an author
+        <ButtonPrimary href="/explore" className="mt-6 sm:mt-11">
+          Explore now
         </ButtonPrimary>
       </div>
       <div className="flex-grow">

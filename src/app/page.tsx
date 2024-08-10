@@ -23,8 +23,6 @@ function PageHome() {
         {/* SECTION HERO */}
         <SectionHero />
 
-        <SectionOurFeatures />
-
         <SectionHowItWork />
 
         <SectionVideos />
