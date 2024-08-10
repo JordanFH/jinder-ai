@@ -8,6 +8,9 @@ type UserPreferences = {
 };
 
 type UserContextType = {
+  name: string;
+  email: string;
+  image: string;
   preferences: UserPreferences;
   setPreferences: (prefs: UserPreferences) => void;
   userData: any;
@@ -25,9 +28,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [userData, setUserData] = useState<any>({
     personalInformation: {
-      name: session?.user?.name || "",
-      email: session?.user?.email || "",
-      image: session?.user?.image || "",
       birthDate: "",
       city: "",
       country: "",
@@ -53,6 +53,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <UserContext.Provider
       value={{
+        name: session?.user?.name || "",
+        email: session?.user?.email || "",
+        image: session?.user?.image || "",
         preferences,
         setPreferences,
         userData,

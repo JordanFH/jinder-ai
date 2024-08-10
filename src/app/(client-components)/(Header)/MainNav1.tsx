@@ -17,7 +17,7 @@ export interface MainNav1Props {
 }
 
 const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
-  const {userData} = useUser();
+  const user = useUser();
 
   return (
     <div className={`nc-MainNav1 relative z-10 ${className}`}>
@@ -40,8 +40,8 @@ const MainNav1: FC<MainNav1Props> = ({ className = "" }) => {
               <SwitchDarkMode />
               <div className="px-1" />
             </div>
-            {userData.personalInformation.email !== "" ? (
-              <AvatarDropdown user={userData.personalInformation} />
+            {user.email !== "" ? (
+              <AvatarDropdown user={user} />
             ) : (
               <ButtonPrimary className="self-center" href="/login">
                 Sign In
