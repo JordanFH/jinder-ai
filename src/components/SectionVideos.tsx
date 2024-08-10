@@ -22,7 +22,7 @@ const VIDEOS_DEMO: VideoType[] = [
     id: "Ao7e4iisKMs",
     title: "JinderAI",
     thumbnail:
-      "https://drive.google.com/thumbnail?id=19t7ta97sI2LSgfhhCm-qlD42e4-lMBfU&sz=w2560",
+      "https://drive.google.com/thumbnail?id=1Cw6a8WtTEfFBw4TCwnCslA2DWBHAkyqw&sz=w2560",
   },
   {
     id: "a5V6gdu5ih8",

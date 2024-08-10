@@ -16,11 +16,11 @@ const SectionHero: FC<SectionHeroProps> = ({ className = "" }) => {
       <div className="flex flex-col lg:flex-row lg:items-center">
         <div className="flex-shrink-0 lg:w-1/2 flex flex-col items-start space-y-8 sm:space-y-10 pb-10 lg:pb-14 xl:pr-14 lg:mr-10 xl:mr-0">
           <h2 className="font-medium text-4xl md:text-5xl xl:text-7xl !leading-[114%] ">
-            Hotel, car & experiences
+            AI-Powered Job Finder
           </h2>
           <span className="text-base md:text-lg text-neutral-500 dark:text-neutral-400">
-            Accompanying us, you have a trip full of experiences. With Chisfis,
-            booking accommodation, resort villas, hotels
+            Find the best job that suits your skills and experience. We use
+            Gemini AI to match you with the best job offers.
           </span>
           <ButtonPrimary href="/explore" sizeClass="px-5 py-4 sm:px-7">
             Start exploring
