@@ -21,20 +21,20 @@ const DEMO_DATA: SectionHowItWorkProps["data"] = [
   {
     id: 1,
     img: HIW1img,
-    title: "Book & relax",
-    desc: "Let each trip be an inspirational journey, each room a peaceful space",
+    title: "Upload your resume",
+    desc: "Create your profile and upload your resume",
   },
   {
     id: 2,
     img: HIW2img,
-    title: "Smart checklist",
-    desc: "Let each trip be an inspirational journey, each room a peaceful space",
+    title: "Find your dream job",
+    desc: "Search for jobs that match your skills and interests",
   },
   {
     id: 3,
     img: HIW3img,
-    title: "Save more",
-    desc: "Let each trip be an inspirational journey, each room a peaceful space",
+    title: "Apply and get hired",
+    desc: "Apply for jobs and get hired quickly. It's that easy!",
   },
 ];
 
