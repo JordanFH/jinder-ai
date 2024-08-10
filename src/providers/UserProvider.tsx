@@ -11,6 +11,8 @@ type UserContextType = {
   name: string;
   email: string;
   image: string;
+  country: string;
+  city: string;
   preferences: UserPreferences;
   setPreferences: (prefs: UserPreferences) => void;
   userData: any;
@@ -27,11 +29,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   });
 
   const [userData, setUserData] = useState<any>({
-    personalInformation: {
-      birthDate: "",
-      city: "",
-      country: "",
-    },
     professionalDetails: {
       specialty: "",
       currentLevel: "",
@@ -43,6 +40,18 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       languages: [],
     },
   });
+
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+
+  fetch(
+    "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}"
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      setCountry(data.countryName);
+      setCity(data.city);
+    });
 
   useEffect(() => {
     if (session) {
@@ -56,6 +65,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         name: session?.user?.name || "",
         email: session?.user?.email || "",
         image: session?.user?.image || "",
+        country: country,
+        city: city,
         preferences,
         setPreferences,
         userData,

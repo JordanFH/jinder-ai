@@ -27,18 +27,13 @@ const AccountPage = () => {
               <Input className="mt-1.5 bg-gray-200 dark:bg-gray-600" defaultValue="" disabled />
             </div>
             {/* ---- */}
-            <div className="">
-              <Label>Date of birth</Label>
-              <Input className="mt-1.5" type="date" defaultValue="" />
-            </div>
-            {/* ---- */}
             <div>
-              <Label>City</Label>
+              <Label>Country</Label>
               <Input className="mt-1.5" defaultValue="" />
             </div>
             {/* ---- */}
             <div>
-              <Label>Country</Label>
+              <Label>City</Label>
               <Input className="mt-1.5" defaultValue="" />
             </div>
           </div>
