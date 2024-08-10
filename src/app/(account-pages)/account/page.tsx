@@ -19,12 +19,12 @@ const AccountPage = () => {
           <div className="flex-grow mt-10 md:mt-0 md:pr-16 max-w-3xl space-y-6">
             <div>
               <Label>Name</Label>
-              <Input className="mt-1.5" defaultValue="" />
+              <Input className="mt-1.5 bg-gray-200 dark:bg-gray-600" defaultValue="" disabled />
             </div>
             {/* ---- */}
             <div>
               <Label>Email</Label>
-              <Input className="mt-1.5" defaultValue="" />
+              <Input className="mt-1.5 bg-gray-200 dark:bg-gray-600" defaultValue="" disabled />
             </div>
             {/* ---- */}
             <div className="">

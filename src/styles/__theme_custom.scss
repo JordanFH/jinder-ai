@@ -286,3 +286,9 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
     rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  /* filter: invert(0.5) sepia(1) hue-rotate(190deg) saturate(5); */
+  /* color: #676E7C */
+  filter: invert(0.40) sepia(15%) hue-rotate(205deg) saturate(5);
+}
