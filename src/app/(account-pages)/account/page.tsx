@@ -32,7 +32,7 @@ const AccountPage = () => {
           <FileUpload />
         </div>
         <div className="flex md:flex-row flex-col-reverse">
-          <div className="flex-grow mt-10 md:mt-0 max-w-3xl space-y-6">
+          <div className="flex-grow mt-0 max-w-3xl space-y-6">
             <div>
               <Label>Name</Label>
               <Input
@@ -101,7 +101,7 @@ const AccountPage = () => {
           </div>
         </div>
       </div>
-      <div className="space-y-6 sm:space-y-8 mt-12">
+      <div className="space-y-6 sm:space-y-8 mt-16">
         {/* HEADING */}
         <h2 className="text-3xl font-semibold">Abilities and skills</h2>
         <div className="w-14 border-b border-2 border-neutral-400 dark:border-neutral-700"></div>
