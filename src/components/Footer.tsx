@@ -14,47 +14,44 @@ export interface WidgetFooterMenu {
 
 const widgetMenus: WidgetFooterMenu[] = [
   {
-    id: "5",
-    title: "Getting started",
-    menus: [
-      { href: "#", label: "Installation" },
-      { href: "#", label: "Release Notes" },
-      { href: "#", label: "Upgrade Guide" },
-      { href: "#", label: "Browser Support" },
-      { href: "#", label: "Editor Support" },
-    ],
-  },
-  {
     id: "1",
-    title: "Explore",
+    title: "Company",
     menus: [
-      { href: "#", label: "Design features" },
-      { href: "#", label: "Prototyping" },
-      { href: "#", label: "Design systems" },
-      { href: "#", label: "Pricing" },
-      { href: "#", label: "Security" },
+      { href: "#", label: "About Us" },
+      { href: "#", label: "Team" },
+      { href: "#", label: "Careers" },
+      { href: "#", label: "Blog" },
     ],
   },
   {
     id: "2",
     title: "Resources",
     menus: [
-      { href: "#", label: "Best practices" },
-      { href: "#", label: "Support" },
+      { href: "#", label: "User Guides" },
+      { href: "#", label: "FAQ" },
       { href: "#", label: "Developers" },
-      { href: "#", label: "Learn design" },
-      { href: "#", label: "Releases" },
+      { href: "#", label: "API Reference" },
+    ],
+  },
+  {
+    id: "3",
+    title: "Get in Touch",
+    menus: [
+      { href: "#", label: "Contact Us" },
+      { href: "#", label: "Support" },
+      { href: "#", label: "Feedback" },
+      { href: "#", label: "Community" },
     ],
   },
   {
     id: "4",
-    title: "Community",
+    title: "Legal Information",
     menus: [
-      { href: "#", label: "Discussion Forums" },
-      { href: "#", label: "Code of Conduct" },
-      { href: "#", label: "Community Resources" },
-      { href: "#", label: "Contributing" },
-      { href: "#", label: "Concurrent Mode" },
+      { href: "#", label: "Privacy Policy" },
+      { href: "#", label: "Terms & Conditions" },
+      { href: "#", label: "Cookie Policy" },
+      { href: "#", label: "Legal Notice" },
+      // { href: "#", label: "Concurrent Mode" },
     ],
   },
 ];
