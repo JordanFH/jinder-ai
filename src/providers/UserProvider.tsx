@@ -44,9 +44,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
 
-  fetch(
-    "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}"
-  )
+  fetch("https://api.bigdatacloud.net/data/reverse-geocode-client")
     .then((response) => response.json())
     .then((data) => {
       setCountry(data.countryName);

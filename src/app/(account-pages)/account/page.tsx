@@ -72,9 +72,15 @@ const AccountPage = () => {
               </Select>
             </div>
             {/* ---- */}
-            <div className="">
+            <div>
               <Label>Years of experience</Label>
-              <Input className="mt-1.5" type="number" defaultValue="" />
+              <Input
+                className="mt-1.5"
+                type="number"
+                defaultValue=""
+                min="1"
+                max="100"
+              />
             </div>
             {/* ---- */}
             <div>
@@ -91,47 +97,13 @@ const AccountPage = () => {
         <div className="flex flex-col md:flex-row">
           <div className="flex-grow mt-10 md:mt-0 md:pr-16 max-w-3xl space-y-6">
             <div>
-              <Label>Name</Label>
-              <Input className="mt-1.5" defaultValue="Eden Tuan" />
+              <Label>Skills</Label>
+              <Input className="mt-1.5" type="number" defaultValue="" />
             </div>
             {/* ---- */}
             <div>
-              <Label>Username</Label>
-              <Input className="mt-1.5" defaultValue="@eden_tuan" />
-            </div>
-            {/* ---- */}
-            <div>
-              <Label>Email</Label>
-              <Input className="mt-1.5" defaultValue="example@email.com" />
-            </div>
-            {/* ---- */}
-            <div className="">
-              <Label>Date of birth</Label>
-              <Input className="mt-1.5" type="date" defaultValue="1990-07-22" />
-            </div>
-            {/* ---- */}
-            <div>
-              <Label>Addess</Label>
-              <Input className="mt-1.5" defaultValue="New york, USA" />
-            </div>
-            {/* ---- */}
-            <div>
-              <Label>Phone number</Label>
-              <Input className="mt-1.5" defaultValue="003 888 232" />
-            </div>
-            {/* ---- */}
-            <div>
-              <Label>About you</Label>
-              <Textarea className="mt-1.5" defaultValue="..." />
-            </div>
-            {/* ---- */}
-            <div>
-              <Label>Gender</Label>
-              <Select className="mt-1.5">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </Select>
+              <Label>Languages</Label>
+              <Input className="mt-1.5" type="number" defaultValue="" />
             </div>
             {/* ---- */}
             <div className="pt-2">
