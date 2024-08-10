@@ -21,7 +21,7 @@ const AccountSavelists = () => {
         <div>
           <h2 className="text-3xl font-semibold">Save lists</h2>
         </div>
-        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
+        <div className="w-14 border-b border-2 border-neutral-400 dark:border-neutral-700"></div>
 
         <div>
           <Tab.Group>

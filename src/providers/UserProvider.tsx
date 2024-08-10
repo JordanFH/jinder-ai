@@ -4,25 +4,44 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
 type UserPreferences = {
-  theme: string;
-  notifications: boolean;
+  isFirstTime: boolean;
 };
 
 type UserContextType = {
-  name: string;
-  email: string;
-  image: string;
   preferences: UserPreferences;
   setPreferences: (prefs: UserPreferences) => void;
+  userData: any;
+  setUserData: (cv: any) => void;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: session } = useSession();
+
   const [preferences, setPreferences] = useState<UserPreferences>({
-    theme: "light",
-    notifications: true,
+    isFirstTime: true,
+  });
+
+  const [userData, setUserData] = useState<any>({
+    personalInformation: {
+      name: session?.user?.name || "",
+      email: session?.user?.email || "",
+      image: session?.user?.image || "",
+      birthDate: "",
+      city: "",
+      country: "",
+    },
+    professionalDetails: {
+      specialty: "",
+      currentLevel: "",
+      yearsExperience: "",
+      summary: "",
+    },
+    abilities: {
+      skills: [],
+      languages: [],
+    },
   });
 
   useEffect(() => {
@@ -34,11 +53,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <UserContext.Provider
       value={{
-        name: session?.user?.name || "",
-        email: session?.user?.email || "",
-        image: session?.user?.image || "",
         preferences,
         setPreferences,
+        userData,
+        setUserData,
       }}
     >
       {children}
