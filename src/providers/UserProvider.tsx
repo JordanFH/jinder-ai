@@ -7,12 +7,12 @@ import { createDocument, fetchDocumentByCondition } from "@/firebase/utils";
 type UserPreferences = {
   isFirstTime: boolean;
   explored: {
-    jobs: string[];
-    courses: string[];
+    jobs: any[];
+    courses: any[];
   };
   saved: {
-    jobs: string[];
-    courses: string[];
+    jobs: any[];
+    courses: any[];
   };
 };
 
