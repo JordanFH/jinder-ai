@@ -41,6 +41,7 @@ const AccountPage = () => {
 
   // User CV file
   const [file, setFile] = useState<File | null>(null);
+  const [cvData, setCvData] = useState<any | null>(null);
   // Personal information
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -49,7 +50,7 @@ const AccountPage = () => {
   // Professional details
   const [specialty, setSpecialty] = useState<string>("");
   const [currentLevel, setCurrentLevel] = useState<string>("");
-  const [yearsOfExperience, setYearsOfExperience] = useState<string>("");
+  const [yearsExperience, setYearsExperience] = useState<string>("");
   const [summary, setSummary] = useState<string>("");
   // Abilities and skills
   const [skills, setSkills] = useState<string[]>([]);
@@ -76,7 +77,7 @@ const AccountPage = () => {
         professionalDetails: {
           specialty,
           currentLevel,
-          yearsExperience: yearsOfExperience.toString(),
+          yearsExperience,
           summary,
         },
         abilities: {
@@ -104,16 +105,27 @@ const AccountPage = () => {
     setCountry(user.country);
     setCity(user.city);
     setSpecialty(professionalDetails.specialty);
-    setCurrentLevel(
-      professionalDetails.currentLevel.length > 0
-        ? professionalDetails.currentLevel
-        : "Junior"
-    );
-    setYearsOfExperience(professionalDetails.yearsExperience);
+    setCurrentLevel(professionalDetails.currentLevel);
+    setYearsExperience(professionalDetails.yearsExperience);
     setSummary(professionalDetails.summary);
     setSkills(abilities.skills);
     setLanguages(abilities.languages);
   }, [user]);
+
+  useEffect(() => {
+    if (cvData) {
+      const newData = cvData.jsonCv;
+      const { abilities, professionalDetails } = newData;
+
+      setSkills(abilities.skills);
+      setLanguages(abilities.languages);
+
+      setSpecialty(professionalDetails.specialty);
+      setCurrentLevel(professionalDetails.currentLevel);
+      setYearsExperience(professionalDetails.yearsExperience);
+      setSummary(professionalDetails.summary);
+    }
+  }, [cvData]);
 
   return (
     <>
@@ -122,7 +134,13 @@ const AccountPage = () => {
         <h2 className="text-3xl font-semibold">Personal information</h2>
         <div className="w-14 border-b border-2 border-neutral-400 dark:border-neutral-700"></div>
         <div className="max-w-3xl mt-6">
-          <FileUpload file={file} setFile={setFile} />
+          <FileUpload
+            file={file}
+            setFile={setFile}
+            setCvData={setCvData}
+            setLoading={setLoading}
+            setDisabled={setDisabled}
+          />
         </div>
         <div className="flex md:flex-row flex-col-reverse">
           <div className="flex-grow mt-0 max-w-3xl space-y-6">
@@ -191,26 +209,19 @@ const AccountPage = () => {
             {/* ---- */}
             <div>
               <Label>Current level</Label>
-              <Select
+              <Input
                 className="mt-1.5"
-                value={currentLevel}
+                defaultValue={currentLevel}
                 onChange={(e) => setCurrentLevel(e.target.value)}
-              >
-                <option value="Junior">Junior</option>
-                <option value="Middle">Middle</option>
-                <option value="Senior">Senior</option>
-              </Select>
+              />
             </div>
             {/* ---- */}
             <div>
               <Label>Years of experience</Label>
               <Input
                 className="mt-1.5"
-                type="number"
-                defaultValue={yearsOfExperience}
-                min="1"
-                max="100"
-                onChange={(e) => setYearsOfExperience(e.target.value)}
+                defaultValue={yearsExperience}
+                onChange={(e) => setYearsExperience(e.target.value)}
               />
             </div>
             {/* ---- */}

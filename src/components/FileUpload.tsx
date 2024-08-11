@@ -1,16 +1,27 @@
 "use client";
 
 import React, { FC, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {
   className?: string;
   file: File | null;
   setFile: (file: File | null) => void;
+  setCvData: (data: any) => void;
+  setLoading: (loading: boolean) => void;
+  setDisabled: (disabled: boolean) => void;
 }
 
-const FileUpload: FC<Props> = ({ className = "", file, setFile }) => {
+const FileUpload: FC<Props> = ({
+  className = "",
+  file,
+  setFile,
+  setCvData,
+  setLoading,
+  setDisabled,
+}) => {
   const [error, setError] = useState<string | null>(null);
-  
+
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const droppedFile = event.dataTransfer.files[0];
@@ -38,6 +49,44 @@ const FileUpload: FC<Props> = ({ className = "", file, setFile }) => {
       if (selectedFile.size <= 5 * 1024 * 1024) {
         setFile(selectedFile);
         setError(null);
+
+        setLoading(true);
+        setDisabled(true);
+
+        // parse selectedFile to base64
+        const reader = new FileReader();
+        reader.readAsDataURL(selectedFile);
+        reader.onload = async () => {
+          let base64 = reader.result as string;
+          base64 = base64.split(",")[1];
+
+          try {
+            const response = await fetch("/api/uploadCV", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ user_id: uuidv4(), file: base64 }),
+            });
+
+            if (!response.ok) {
+              throw new Error("Failed to fetch CV data");
+            }
+
+            let { success, result } = await response.json();
+
+            if (!success) {
+              throw new Error("Failed to fetch CV data");
+            }
+
+            setCvData(result);
+
+            setLoading(false);
+            setDisabled(false);
+          } catch (error) {
+            console.error(error);
+          }
+        };
       } else {
         setError("File size exceeds 5MB limit.");
       }
