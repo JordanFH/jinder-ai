@@ -22,32 +22,41 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
   const renderTienIch = () => {
     return (
       <div className="block space-y-4">
-        <div className="flex items-center space-x-2">
-          <span className="inline-block">
-            <i className="las la-bed text-lg"></i>
-          </span>
-          <span className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
-            Contract type:
-          </span>
-        </div>
-
-        {/* ---- */}
-        <div className="flex items-center space-x-2">
-          <span className="inline-block">
-            <i className="las la-bath text-lg"></i>
-          </span>
-          <span className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
-            Requirements:
+        <div>
+          <div className="flex items-center space-x-2 mb-1">
+            <span className="inline-block">
+              <i className="las la-file-contract text-lg"></i>
+            </span>
+            <span className="text-xs font-semibold">Contract type:</span>
+          </div>
+          <span className="text-sm">
+            lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
           </span>
         </div>
 
         {/* ---- */}
-        <div className="flex items-center space-x-2">
-          <span className="inline-block">
-            <i className="las la-expand-arrows-alt text-lg"></i>
+        <div>
+          <div className="flex items-center space-x-2 mb-1">
+            <span className="inline-block">
+              <i className="las la-file-invoice text-lg"></i>
+            </span>
+            <span className="text-xs font-semibold">Requirements:</span>
+          </div>
+          <span className="text-sm">
+            lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
           </span>
-          <span className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
-            Description:
+        </div>
+
+        {/* ---- */}
+        <div>
+          <div className="flex items-center space-x-2 mb-1">
+            <span className="inline-block">
+              <i className="las la-tag text-lg"></i>
+            </span>
+            <span className="text-xs font-semibold">Description:</span>
+          </div>
+          <span className="text-sm">
+            lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
           </span>
         </div>
       </div>
@@ -79,17 +88,19 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
           </div>
           <div className="flex items-center space-x-2">
             <h2 className="text-lg font-medium capitalize">
-              <span className="line-clamp-2">
-                Position
-              </span>
+              <span className="line-clamp-2">Position</span>
             </h2>
           </div>
           {renderTienIch()}
           <div className="w-14 border-b border-neutral-200/80 dark:border-neutral-700 "></div>
           <div className="flex w-full justify-end items-end">
-            <button className="flex items-center justify-center px-4 py-2 border-2 border-secondary-500 rounded-lg leading-none font-medium text-secondary-500 hover:bg-secondary-500 hover:text-white transition-colors duration-200">
+            <a
+              href="/"
+              target="_blank"
+              className="flex items-center justify-center px-4 py-2 border-2 border-secondary-500 rounded-lg leading-none font-medium text-secondary-500 hover:bg-secondary-500 hover:text-white transition-colors duration-200"
+            >
               Apply
-            </button>
+            </a>
           </div>
         </div>
       </div>
