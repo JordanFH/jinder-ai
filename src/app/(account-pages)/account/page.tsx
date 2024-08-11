@@ -7,6 +7,7 @@ import Input from "@/shared/Input";
 import Select from "@/shared/Select";
 import Textarea from "@/shared/Textarea";
 import FileUpload from "@/components/FileUpload";
+import { useUser } from "@/providers/UserProvider";
 
 export interface AccountPageProps {}
 
@@ -25,21 +26,45 @@ const renderLabel = (text: string, onRemove: () => void) => {
 };
 
 const AccountPage = () => {
+  const user = useUser();
+
+  const { professionalDetails, abilities } = user.userData;
+
+  // {
+  //   "specialty": "",
+  //   "currentLevel": "",
+  //   "yearsExperience": "",
+  //   "summary": ""
+  // }
+
+  // {
+  //   "skills": [],
+  //   "languages": []
+  // }
+
   // User CV file
   const [file, setFile] = useState<File | null>(null);
   // Personal information
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [country, setCountry] = useState<string>("");
-  const [city, setCity] = useState<string>("");
+  const [name, setName] = useState<string>(user.name);
+  const [email, setEmail] = useState<string>(user.email);
+  const [country, setCountry] = useState<string>(user.country);
+  const [city, setCity] = useState<string>(user.city);
   // Professional details
-  const [specialty, setSpecialty] = useState<string>("");
-  const [currentLevel, setCurrentLevel] = useState<string>("Junior");
-  const [yearsOfExperience, setYearsOfExperience] = useState<number>(1);
-  const [summary, setSummary] = useState<string>("");
+  const [specialty, setSpecialty] = useState<string>(
+    professionalDetails.specialty
+  );
+  const [currentLevel, setCurrentLevel] = useState<string>(
+    professionalDetails.currentLevel.length > 0
+      ? professionalDetails.currentLevel
+      : "Junior"
+  );
+  const [yearsOfExperience, setYearsOfExperience] = useState<number>(
+    Number(professionalDetails.yearsExperience)
+  );
+  const [summary, setSummary] = useState<string>(professionalDetails.summary);
   // Abilities and skills
-  const [skills, setSkills] = useState<string[]>([]);
-  const [languages, setLanguages] = useState<string[]>([]);
+  const [skills, setSkills] = useState<string[]>(abilities.skills);
+  const [languages, setLanguages] = useState<string[]>(abilities.languages);
 
   const handleRemoveLabel = (index: number, isLanguage = false) => {
     if (isLanguage) {
