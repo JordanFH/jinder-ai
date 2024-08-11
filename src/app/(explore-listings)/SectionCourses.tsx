@@ -1,20 +1,23 @@
+"use client";
+
 import React, { FC } from "react";
-import { DEMO_CAR_LISTINGS } from "@/data/listings";
-import { CarDataType } from "@/data/types";
 import Heading2 from "@/shared/Heading2";
 import CarCard from "@/components/CarCard";
+import { useUser } from "@/providers/UserProvider";
+import Link from "next/link";
+import ButtonPrimary from "@/shared/ButtonPrimary";
 
 export interface SectionCoursesProps {
   className?: string;
-  data?: CarDataType[];
+  data?: any[];
 }
 
-const DEMO_DATA: CarDataType[] = DEMO_CAR_LISTINGS.filter((_, i) => i < 8);
+const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
+  const { preferences } = useUser();
 
-const SectionGridFilterCard: FC<SectionCoursesProps> = ({
-  className = "",
-  data = DEMO_DATA,
-}) => {
+  const { courses } = preferences.explored;
+
+  console.log(courses);
   return (
     <div
       className={`nc-SectionGridFilterCard ${className}`}
@@ -23,9 +26,20 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({
       <Heading2 heading="Courses" subHeading="Recommended courses for you" />
 
       <div className="grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {data.map((stay) => (
-          <CarCard key={stay.id} data={stay} />
+        {courses.map((course) => (
+          <CarCard key={course.id} data={course} />
         ))}
+      </div>
+      {courses.length === 0 && (
+        <p className="w-100 text-center">
+          No courses available.{" "}
+          <Link className="hover:underline" href="/account">
+            Try updating your preferences here.
+          </Link>
+        </p>
+      )}
+      <div className="mt-6 w-100 text-center">
+        <ButtonPrimary>Refresh</ButtonPrimary>
       </div>
     </div>
   );

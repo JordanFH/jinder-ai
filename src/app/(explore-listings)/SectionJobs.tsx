@@ -1,20 +1,24 @@
+"use client";
+
 import React, { FC } from "react";
-import { DEMO_STAY_LISTINGS } from "@/data/listings";
-import { StayDataType } from "@/data/types";
 import Heading2 from "@/shared/Heading2";
 import PropertyCardH from "@/components/PropertyCardH";
+import { useUser } from "@/providers/UserProvider";
+import Link from "next/link";
+import ButtonPrimary from "@/shared/ButtonPrimary";
 
 export interface SectionJobsProps {
   className?: string;
-  data?: StayDataType[];
+  data?: any[];
 }
 
-const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
+const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
+  const { preferences } = useUser();
 
-const SectionGridFilterCard: FC<SectionJobsProps> = ({
-  className = "",
-  data = DEMO_DATA,
-}) => {
+  const { jobs } = preferences.explored;
+
+  console.log(jobs);
+
   return (
     <div className={`nc-SectionGridFilterCard ${className}`}>
       <Heading2
@@ -23,9 +27,20 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({
       />
 
       <div className="grid grid-cols-1 gap-6 md:gap-8 xl:grid-cols-2 ">
-        {data.map((stay) => (
-          <PropertyCardH key={stay.id} data={stay} />
+        {jobs.map((job) => (
+          <PropertyCardH key={job.id} data={job} />
         ))}
+      </div>
+      {jobs.length === 0 && (
+        <p className="w-100 text-center">
+          No jobs available.{" "}
+          <Link className="hover:underline" href="/account">
+            Try updating your preferences here.
+          </Link>
+        </p>
+      )}
+      <div className="mt-6 w-100 text-center">
+        <ButtonPrimary>Refresh</ButtonPrimary>
       </div>
     </div>
   );
