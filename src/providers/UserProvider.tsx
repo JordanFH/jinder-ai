@@ -5,6 +5,14 @@ import { useSession } from "next-auth/react";
 
 type UserPreferences = {
   isFirstTime: boolean;
+  explored: {
+    jobs: string[];
+    courses: string[];
+  };
+  saved: {
+    jobs: string[];
+    courses: string[];
+  };
 };
 
 type UserContextType = {
@@ -26,6 +34,14 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [preferences, setPreferences] = useState<UserPreferences>({
     isFirstTime: true,
+    explored: {
+      jobs: [],
+      courses: [],
+    },
+    saved: {
+      jobs: [],
+      courses: [],
+    },
   });
 
   const [userData, setUserData] = useState<any>({

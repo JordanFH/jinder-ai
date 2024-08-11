@@ -30,41 +30,21 @@ const AccountPage = () => {
 
   const { professionalDetails, abilities } = user.userData;
 
-  // {
-  //   "specialty": "",
-  //   "currentLevel": "",
-  //   "yearsExperience": "",
-  //   "summary": ""
-  // }
-
-  // {
-  //   "skills": [],
-  //   "languages": []
-  // }
-
   // User CV file
   const [file, setFile] = useState<File | null>(null);
   // Personal information
-  const [name, setName] = useState<string>(user.name);
-  const [email, setEmail] = useState<string>(user.email);
-  const [country, setCountry] = useState<string>(user.country);
-  const [city, setCity] = useState<string>(user.city);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [country, setCountry] = useState<string>("");
+  const [city, setCity] = useState<string>("");
   // Professional details
-  const [specialty, setSpecialty] = useState<string>(
-    professionalDetails.specialty
-  );
-  const [currentLevel, setCurrentLevel] = useState<string>(
-    professionalDetails.currentLevel.length > 0
-      ? professionalDetails.currentLevel
-      : "Junior"
-  );
-  const [yearsOfExperience, setYearsOfExperience] = useState<number>(
-    Number(professionalDetails.yearsExperience)
-  );
-  const [summary, setSummary] = useState<string>(professionalDetails.summary);
+  const [specialty, setSpecialty] = useState<string>("");
+  const [currentLevel, setCurrentLevel] = useState<string>("");
+  const [yearsOfExperience, setYearsOfExperience] = useState<number>(0);
+  const [summary, setSummary] = useState<string>("");
   // Abilities and skills
-  const [skills, setSkills] = useState<string[]>(abilities.skills);
-  const [languages, setLanguages] = useState<string[]>(abilities.languages);
+  const [skills, setSkills] = useState<string[]>([]);
+  const [languages, setLanguages] = useState<string[]>([]);
 
   const handleRemoveLabel = (index: number, isLanguage = false) => {
     if (isLanguage) {
@@ -73,6 +53,46 @@ const AccountPage = () => {
       setSkills(skills.filter((_, i) => i !== index));
     }
   };
+
+  const handleUpdateInfo = () => {
+    const updatedUser = {
+      ...user,
+      country,
+      city,
+      userData: {
+        ...user.userData,
+        professionalDetails: {
+          specialty,
+          currentLevel,
+          yearsExperience: yearsOfExperience.toString(),
+          summary,
+        },
+        abilities: {
+          skills,
+          languages,
+        },
+      },
+    };
+
+    console.log(updatedUser);
+  };
+
+  useEffect(() => {
+    setName(user.name);
+    setEmail(user.email);
+    setCountry(user.country);
+    setCity(user.city);
+    setSpecialty(professionalDetails.specialty);
+    setCurrentLevel(
+      professionalDetails.currentLevel.length > 0
+        ? professionalDetails.currentLevel
+        : "Junior"
+    );
+    setYearsOfExperience(Number(professionalDetails.yearsExperience));
+    setSummary(professionalDetails.summary);
+    setSkills(abilities.skills);
+    setLanguages(abilities.languages);
+  }, [user]);
 
   return (
     <>
@@ -267,7 +287,7 @@ const AccountPage = () => {
             </div>
             {/* ---- */}
             <div className="pt-2">
-              <ButtonPrimary onClick={() => console.log("Update info clicked")}>
+              <ButtonPrimary onClick={() => handleUpdateInfo()}>
                 Update info
               </ButtonPrimary>
             </div>
