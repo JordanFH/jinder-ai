@@ -1,15 +1,15 @@
 import React, { FC } from "react";
-import { DEMO_STAY_LISTINGS } from "@/data/listings";
-import { StayDataType } from "@/data/types";
+import { DEMO_CAR_LISTINGS } from "@/data/listings";
+import { CarDataType } from "@/data/types";
 import Heading2 from "@/shared/Heading2";
-import StayCard2 from "@/components/StayCard2";
+import CarCard from "@/components/CarCard";
 
 export interface SectionGridFilterCardProps {
   className?: string;
-  data?: StayDataType[];
+  data?: CarDataType[];
 }
 
-const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
+const DEMO_DATA: CarDataType[] = DEMO_CAR_LISTINGS.filter((_, i) => i < 8);
 
 const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
   className = "",
@@ -24,7 +24,7 @@ const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
 
       <div className="grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {data.map((stay) => (
-          <StayCard2 key={stay.id} data={stay} />
+          <CarCard key={stay.id} data={stay} />
         ))}
       </div>
     </div>

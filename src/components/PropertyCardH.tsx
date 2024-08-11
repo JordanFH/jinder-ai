@@ -3,8 +3,6 @@ import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import BtnLikeIcon from "@/components/BtnLikeIcon";
 import Badge from "@/shared/Badge";
 import { StayDataType } from "@/data/types";
-import Image from "next/image";
-import gemini_logo from "@/images/Google_Gemini.svg";
 
 export interface PropertyCardHProps {
   className?: string;
@@ -90,23 +88,11 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
             </h2>
           </div>
           {renderTienIch()}
-          <div className="w-100 border-b border-2 border-neutral-200/80 dark:border-neutral-700 "></div>
-          <div className="flex w-full justify-between items-center">
-            <span className="flex items-end align-middle">
-              <span className="font-medium">
-                Generated with
-              </span>
-              <Image
-                src={gemini_logo}
-                alt="Gemini"
-                height={21.5}
-                className="ms-2 pb-1"
-              />
-            </span>
+          <div className="flex w-full justify-end items-end">
             <a
               href="/"
               target="_blank"
-              className="flex items-center justify-center px-4 py-2 border-2 border-secondary-500 rounded-lg leading-none font-medium text-secondary-500 hover:bg-secondary-500 hover:text-white transition-colors duration-200"
+              className="flex items-center justify-center px-6 py-2 border-2 border-primary-500 rounded-lg leading-none font-medium text-primary-500 hover:bg-primary-500 hover:text-white transition-colors duration-200"
             >
               Apply
             </a>
