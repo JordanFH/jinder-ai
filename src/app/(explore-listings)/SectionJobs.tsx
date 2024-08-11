@@ -3,7 +3,7 @@
 import React, { FC, useEffect, useState } from "react";
 import Heading2 from "@/shared/Heading2";
 import PropertyCardH from "@/components/PropertyCardH";
-import { useUser } from "@/providers/UserProvider";
+import { getUserByEmail, useUser } from "@/providers/UserProvider";
 import Link from "next/link";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import { v4 as uuidv4 } from "uuid";
@@ -18,6 +18,8 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
 
   const user = useUser();
   const [data, setData] = useState<any[]>([]);
+
+  const [userData, setUserData] = useState<any>(null);
 
   const searchJobs = async (query: any, location: any) => {
     setLoading(true);
@@ -57,13 +59,23 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
   };
 
   useEffect(() => {
-    if (user && user.userData.professionalDetails.specialty !== "" && user.country !== "") {      
+    if (!userData) {
+      getUserByEmail(user.email).then((user) => {
+        if (user) {
+          setUserData(user);
+        }
+      });
+    }
+  }, [user, userData]);
+
+  useEffect(() => {
+    if (userData && userData.userData.professionalDetails.specialty !== "") {
       searchJobs(
-        `${user.userData.professionalDetails.specialty} jobs`,
-        `${user.country}`
+        `${userData.userData.professionalDetails.specialty} jobs`,
+        `${userData.country}`
       );
     }
-  }, [user]);
+  }, [userData]);
 
   return (
     <div className={`nc-SectionGridFilterCard ${className}`}>
@@ -89,8 +101,8 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
         <ButtonPrimary
           onClick={() =>
             searchJobs(
-              `${user.userData.professionalDetails.specialty} jobs`,
-              `${user.country}`
+              `${userData.userData.professionalDetails.specialty} jobs`,
+              `${userData.country}`
             )
           }
           loading={loading}

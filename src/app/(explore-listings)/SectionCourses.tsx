@@ -3,7 +3,7 @@
 import React, { FC, use, useEffect, useState } from "react";
 import Heading2 from "@/shared/Heading2";
 import CarCard from "@/components/CarCard";
-import { useUser } from "@/providers/UserProvider";
+import { getUserByEmail, useUser } from "@/providers/UserProvider";
 import Link from "next/link";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import { v4 as uuidv4 } from "uuid";
@@ -18,6 +18,8 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
 
   const user = useUser();
   const [data, setData] = useState<any[]>([]);
+
+  const [userData, setUserData] = useState<any>(null);
 
   const searchCourses = async (query: any) => {
     setLoading(true);
@@ -57,10 +59,20 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
   };
 
   useEffect(() => {
-    if (user && user.userData.professionalDetails.specialty !== "") {
-      searchCourses(`${user.userData.professionalDetails.specialty} courses`);
+    if (!userData) {
+      getUserByEmail(user.email).then((user) => {
+        if (user) {
+          setUserData(user.userData);
+        }
+      });
     }
-  }, [user]);
+  }, [user, userData]);
+
+  useEffect(() => {
+    if (userData && userData.professionalDetails.specialty !== "") {
+      searchCourses(`${userData.professionalDetails.specialty} courses`);
+    }
+  }, [userData]);
 
   return (
     <div

@@ -32,7 +32,7 @@ const createUser = async (newUser: any) => {
   await createDocument("users", newUser);
 };
 
-const getUserByEmail = async (email: string) => {
+export const getUserByEmail = async (email: string) => {
   const user = await fetchDocumentByCondition("users", "email", email);
   return user;
 };
