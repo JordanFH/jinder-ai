@@ -58,8 +58,6 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
 
   useEffect(() => {
     if (user && user.userData.professionalDetails.specialty !== "") {
-      console.log(`${user.userData.professionalDetails.specialty} courses`);
-
       searchCourses(`${user.userData.professionalDetails.specialty} courses`);
     }
   }, [user]);
