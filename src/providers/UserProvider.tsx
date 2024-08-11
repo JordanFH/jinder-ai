@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { createDocument, fetchDocumentByCondition } from "@/firebase/utils";
 
 type UserPreferences = {
   isFirstTime: boolean;
@@ -29,8 +30,22 @@ type UserContextType = {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
+const createUser = async (newUser: any) => {
+  await createDocument("users", newUser);
+};
+
+const getUserByEmail = async (email: string) => {
+  const user = await fetchDocumentByCondition("users", "email", email);
+  return user;
+};
+
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: session } = useSession();
+
+  const [personalInformation, setPersonalInformation] = useState({
+    country: "",
+    city: "",
+  });
 
   const [preferences, setPreferences] = useState<UserPreferences>({
     isFirstTime: true,
@@ -69,7 +84,32 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (session) {
-      // Load user preferences from a data source, e.g., Firebase
+      const email = session?.user?.email || "";
+
+      getUserByEmail(email).then((user) => {
+        if (user) {
+          console.log("User already exists");
+
+          setPreferences(user.preferences);
+          setUserData(user.userData);
+        } else {
+          console.log("Creating new user");
+          
+          const newUser = {
+            email: session?.user?.email,
+            name: session?.user?.name,
+            image: session?.user?.image,
+            country: country,
+            city: city,
+            userData,
+            preferences,
+          };
+          createUser(newUser);
+
+          setPreferences(newUser.preferences);
+          setUserData(newUser.userData);
+        }
+      });
     }
   }, [session]);
 
