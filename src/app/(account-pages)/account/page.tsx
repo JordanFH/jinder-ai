@@ -4,11 +4,10 @@ import React, { useEffect, useState } from "react";
 import Label from "@/components/Label";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import Input from "@/shared/Input";
-import Select from "@/shared/Select";
 import Textarea from "@/shared/Textarea";
 import FileUpload from "@/components/FileUpload";
 import { useUser } from "@/providers/UserProvider";
-import { updateDocumentByCondition } from "@/firebase/utils";
+import { updateUserByEmail } from "@/utils/userUtils";
 
 export interface AccountPageProps {}
 
@@ -24,10 +23,6 @@ const renderLabel = (text: string, onRemove: () => void) => {
       ></i>
     </div>
   );
-};
-
-export const updateUserByEmail = async (email: string, values: any) => {
-  await updateDocumentByCondition("users", "email", email, values);
 };
 
 const AccountPage = () => {

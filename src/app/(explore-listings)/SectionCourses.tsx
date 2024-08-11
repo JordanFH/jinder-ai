@@ -3,11 +3,11 @@
 import React, { FC, use, useEffect, useState } from "react";
 import Heading2 from "@/shared/Heading2";
 import CarCard from "@/components/CarCard";
-import { getUserByEmail, useUser } from "@/providers/UserProvider";
+import { useUser } from "@/providers/UserProvider";
 import Link from "next/link";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import { v4 as uuidv4 } from "uuid";
-import { updateUserByEmail } from "../(account-pages)/account/page";
+import { getUserByEmail, updateUserByEmail } from "@/utils/userUtils";
 
 export interface SectionCoursesProps {
   className?: string;

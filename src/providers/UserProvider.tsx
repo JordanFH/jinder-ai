@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { createDocument, fetchDocumentByCondition } from "@/firebase/utils";
+import { createUser, getUserByEmail } from "@/utils/userUtils";
 
 type UserPreferences = {
   isFirstTime: boolean;
@@ -27,15 +27,6 @@ type UserContextType = {
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
-
-const createUser = async (newUser: any) => {
-  await createDocument("users", newUser);
-};
-
-export const getUserByEmail = async (email: string) => {
-  const user = await fetchDocumentByCondition("users", "email", email);
-  return user;
-};
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: session } = useSession();
