@@ -1,13 +1,57 @@
-import React, { FC } from "react";
+"use client";
+
+import React, { FC, useState } from "react";
 
 interface Props {
   className?: string;
 }
 
 const FileUpload: FC<Props> = ({ className = "" }) => {
+  const [file, setFile] = useState<File | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const droppedFile = event.dataTransfer.files[0];
+
+    if (droppedFile && droppedFile.type === "application/pdf") {
+      if (droppedFile.size <= 5 * 1024 * 1024) {
+        setFile(droppedFile);
+        setError(null);
+      } else {
+        setError("File size exceeds 5MB limit.");
+      }
+    } else {
+      setError("Only PDF files are allowed.");
+    }
+  };
+
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+
+    if (selectedFile && selectedFile.type === "application/pdf") {
+      if (selectedFile.size <= 5 * 1024 * 1024) {
+        setFile(selectedFile);
+        setError(null);
+      } else {
+        setError("File size exceeds 5MB limit.");
+      }
+    } else {
+      setError("Only PDF files are allowed.");
+    }
+  };
+
   return (
     <div className={`${className}`}>
-      <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-neutral-300 dark:border-neutral-600 border-dashed rounded-md">
+      <div
+        className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-neutral-300 dark:border-neutral-600 border-dashed rounded-md"
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+      >
         <div className="space-y-1 text-center">
           <svg
             className="mx-auto h-12 w-12 text-neutral-400"
@@ -35,10 +79,19 @@ const FileUpload: FC<Props> = ({ className = "" }) => {
                 type="file"
                 className="sr-only"
                 accept=".pdf"
+                onChange={handleFileChange}
               />
             </label>
             <p className="pl-1">or drag and drop</p>
           </div>
+          {file && (
+            <p className="text-xs text-neutral-500 dark:text-neutral-400">
+              Selected file: {file.name}
+            </p>
+          )}
+          {error && (
+            <p className="text-xs text-red-500 dark:text-red-400">{error}</p>
+          )}
           <p className="text-xs text-neutral-500 dark:text-neutral-400">
             PDF up to 5MB
           </p>
