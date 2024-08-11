@@ -6,12 +6,11 @@ import ButtonPrimary from "@/shared/ButtonPrimary";
 import Input from "@/shared/Input";
 import Select from "@/shared/Select";
 import Textarea from "@/shared/Textarea";
-import Checkbox from "@/shared/Checkbox";
 import FileUpload from "@/components/FileUpload";
 
 export interface AccountPageProps {}
 
-const renderSkill = (text: string, onRemove: () => void) => {
+const renderLabel = (text: string, onRemove: () => void) => {
   return (
     <div className="flex items-center justify-between py-3">
       <span className="text-neutral-600 dark:text-neutral-400 text-sm">
@@ -42,35 +41,13 @@ const AccountPage = () => {
   const [skills, setSkills] = useState<string[]>([]);
   const [languages, setLanguages] = useState<string[]>([]);
 
-  const handleRemoveSkill = (index: number) => {
-    setSkills(skills.filter((_, i) => i !== index));
+  const handleRemoveLabel = (index: number, isLanguage = false) => {
+    if (isLanguage) {
+      setLanguages(languages.filter((_, i) => i !== index));
+    } else {
+      setSkills(skills.filter((_, i) => i !== index));
+    }
   };
-
-  // useEffect(() => {
-  //   console.log({
-  //     name,
-  //     email,
-  //     country,
-  //     city,
-  //     specialty,
-  //     currentLevel,
-  //     yearsOfExperience,
-  //     summary,
-  //     skills,
-  //     languages,
-  //   });
-  // }, [
-  //   name,
-  //   email,
-  //   country,
-  //   city,
-  //   specialty,
-  //   currentLevel,
-  //   yearsOfExperience,
-  //   summary,
-  //   skills,
-  //   languages,
-  // ]);
 
   return (
     <>
@@ -186,7 +163,7 @@ const AccountPage = () => {
                 <div className="flow-root">
                   <div className="-my-3 divide-y divide-neutral-100 dark:divide-neutral-800">
                     {skills.map((skill, index) =>
-                      renderSkill(skill, () => handleRemoveSkill(index))
+                      renderLabel(skill, () => handleRemoveLabel(index))
                     )}
                   </div>
                 </div>
@@ -214,7 +191,7 @@ const AccountPage = () => {
                     }}
                   >
                     <i className="text-xl las la-plus"></i>
-                    <span className="ml-3">Add skill</span>
+                    <span className="ml-3">Add</span>
                   </ButtonPrimary>
                 </div>
               </div>
@@ -222,29 +199,46 @@ const AccountPage = () => {
             {/* ---- */}
             <div>
               <Label>Languages</Label>
-              {/* <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {languages.map((language, index) => (
-                  <Checkbox 
-                    key={index} 
-                    label={language} 
-                    name={language} 
-                    defaultChecked 
-                    onChange={(e) => {
-                      if (!e.target.checked) {
-                        setLanguages(languages.filter(l => l !== language));
+              <div
+                className={`space-y-8 ${languages.length > 0 ? "mt-6" : ""}`}
+              >
+                <div className="flow-root">
+                  <div className="-my-3 divide-y divide-neutral-100 dark:divide-neutral-800">
+                    {languages.map((language, index) =>
+                      renderLabel(language, () =>
+                        handleRemoveLabel(index, true)
+                      )
+                    )}
+                  </div>
+                </div>
+                <div className="flex flex-col sm:flex-row sm:justify-between space-y-3 sm:space-y-0 sm:space-x-5">
+                  <Input
+                    className="!h-full"
+                    placeholder="Add a new language"
+                    onKeyPress={(e) => {
+                      if (e.key === "Enter") {
+                        setLanguages([...languages, e.currentTarget.value]);
+                        e.currentTarget.value = "";
                       }
                     }}
                   />
-                ))}
-                <Checkbox label="Add new language" name="newLanguage" onChange={(e) => {
-                  if (e.target.checked) {
-                    const newLanguage = prompt("Enter new language:");
-                    if (newLanguage) {
-                      setLanguages([...languages, newLanguage]);
-                    }
-                  }
-                }} />
-              </div> */}
+                  <ButtonPrimary
+                    className="flex-shrink-0"
+                    onClick={() => {
+                      const newLanguage = document.querySelector(
+                        "input[placeholder='Add a new language']"
+                      ) as HTMLInputElement;
+                      if (newLanguage.value) {
+                        setLanguages([...languages, newLanguage.value]);
+                        newLanguage.value = "";
+                      }
+                    }}
+                  >
+                    <i className="text-xl las la-plus"></i>
+                    <span className="ml-3">Add</span>
+                  </ButtonPrimary>
+                </div>
+              </div>
             </div>
             {/* ---- */}
             <div className="pt-2">
