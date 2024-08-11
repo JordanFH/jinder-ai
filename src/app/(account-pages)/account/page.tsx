@@ -11,13 +11,16 @@ import FileUpload from "@/components/FileUpload";
 
 export interface AccountPageProps {}
 
-const renderNoInclude = (text: string) => {
+const renderSkill = (text: string, onRemove: () => void) => {
   return (
     <div className="flex items-center justify-between py-3">
       <span className="text-neutral-600 dark:text-neutral-400 text-sm">
         {text}
       </span>
-      <i className="text-2xl text-neutral-400 las la-times-circle hover:text-neutral-900 dark:hover:text-neutral-100 cursor-pointer"></i>
+      <i
+        className="text-2xl text-neutral-400 las la-times-circle hover:text-neutral-900 dark:hover:text-neutral-100 cursor-pointer"
+        onClick={onRemove}
+      ></i>
     </div>
   );
 };
@@ -38,6 +41,10 @@ const AccountPage = () => {
   // Abilities and skills
   const [skills, setSkills] = useState<string[]>([]);
   const [languages, setLanguages] = useState<string[]>([]);
+
+  const handleRemoveSkill = (index: number) => {
+    setSkills(skills.filter((_, i) => i !== index));
+  };
 
   // useEffect(() => {
   //   console.log({
@@ -175,10 +182,12 @@ const AccountPage = () => {
           <div className="flex-grow mt-10 md:mt-0 max-w-3xl space-y-6">
             <div>
               <Label>Skills</Label>
-              <div className="mt-6 space-y-8">
+              <div className={`space-y-8 ${skills.length > 0 ? "mt-6" : ""}`}>
                 <div className="flow-root">
                   <div className="-my-3 divide-y divide-neutral-100 dark:divide-neutral-800">
-                    {skills.map((skill, index) => renderNoInclude(skill))}
+                    {skills.map((skill, index) =>
+                      renderSkill(skill, () => handleRemoveSkill(index))
+                    )}
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:justify-between space-y-3 sm:space-y-0 sm:space-x-5">
