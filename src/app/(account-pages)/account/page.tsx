@@ -153,6 +153,10 @@ const AccountPage = () => {
                 defaultValue={country}
                 onChange={(e) => setCountry(e.target.value)}
               />
+              <p className="text-primary-600 mt-2">
+                * This field is very important for the job search. Please make
+                sure to update it.
+              </p>
             </div>
             {/* ---- */}
             <div>
@@ -179,6 +183,10 @@ const AccountPage = () => {
                 defaultValue={specialty}
                 onChange={(e) => setSpecialty(e.target.value)}
               />
+              <p className="text-primary-600 mt-2">
+                * This field is very important for the job search. Please make
+                sure to update it.
+              </p>
             </div>
             {/* ---- */}
             <div>
