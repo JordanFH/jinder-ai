@@ -1,12 +1,10 @@
 import React, { FC } from "react";
-import GallerySlider from "@/components/GallerySlider";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
-import StartRating from "@/components/StartRating";
 import BtnLikeIcon from "@/components/BtnLikeIcon";
-import SaleOffBadge from "@/components/SaleOffBadge";
 import Badge from "@/shared/Badge";
 import { StayDataType } from "@/data/types";
-import Link from "next/link";
+import Image from "next/image";
+import gemini_logo from "@/images/Google_Gemini.svg";
 
 export interface PropertyCardHProps {
   className?: string;
@@ -29,7 +27,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
             </span>
             <span className="text-xs font-semibold">Contract type:</span>
           </div>
-          <span className="text-sm">
+          <span className="text-sm text-neutral-600 dark:text-neutral-500">
             lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
           </span>
         </div>
@@ -42,7 +40,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
             </span>
             <span className="text-xs font-semibold">Requirements:</span>
           </div>
-          <span className="text-sm">
+          <span className="text-sm text-neutral-600 dark:text-neutral-500">
             lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
           </span>
         </div>
@@ -55,7 +53,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
             </span>
             <span className="text-xs font-semibold">Description:</span>
           </div>
-          <span className="text-sm">
+          <span className="text-sm text-neutral-600 dark:text-neutral-500">
             lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
           </span>
         </div>
@@ -92,8 +90,19 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
             </h2>
           </div>
           {renderTienIch()}
-          <div className="w-14 border-b border-neutral-200/80 dark:border-neutral-700 "></div>
-          <div className="flex w-full justify-end items-end">
+          <div className="w-100 border-b border-2 border-neutral-200/80 dark:border-neutral-700 "></div>
+          <div className="flex w-full justify-between items-center">
+            <span className="flex items-end align-middle">
+              <span className="font-medium">
+                Generated with
+              </span>
+              <Image
+                src={gemini_logo}
+                alt="Gemini"
+                height={21.5}
+                className="ms-2 pb-1"
+              />
+            </span>
             <a
               href="/"
               target="_blank"
