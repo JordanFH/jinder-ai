@@ -7,6 +7,7 @@ import { getUserByEmail, useUser } from "@/providers/UserProvider";
 import Link from "next/link";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import { v4 as uuidv4 } from "uuid";
+import { updateUserByEmail } from "../(account-pages)/account/page";
 
 export interface SectionCoursesProps {
   className?: string;
@@ -26,7 +27,7 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
     setDisabled(true);
 
     try {
-      const response = await fetch("/api/searchCourses", {
+      const response = await fetch("/api/search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,6 +51,7 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
       });
 
       setData(result);
+      handleUpdateInfo(result);
 
       setLoading(false);
       setDisabled(false);
@@ -58,21 +60,61 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
     }
   };
 
+  const handleUpdateInfo = (data: any) => {
+    const updatedUser = {
+      ...userData,
+      preferences: {
+        ...userData.preferences,
+        explored: {
+          ...userData.preferences.explored,
+          courses: data,
+        },
+      },
+    };
+
+    updateUserByEmail(userData.email, updatedUser)
+      .then(() => {
+        setLoading(false);
+        setDisabled(false);
+      })
+      .catch((error) => {
+        console.error("Error updating document: ", error);
+        setLoading(false);
+        setDisabled(false);
+      });
+  };
+
   useEffect(() => {
     if (!userData) {
-      getUserByEmail(user.email).then((user) => {
-        if (user) {
-          setUserData(user.userData);
-        }
-      });
+      setLoading(true);
+      setDisabled(true);
+
+      getUserByEmail(user.email)
+        .then((user) => {
+          if (user) {
+            setUserData(user);
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+          setDisabled(false);
+        });
     }
   }, [user, userData]);
 
   useEffect(() => {
-    if (userData && userData.professionalDetails.specialty !== "") {
-      searchCourses(`${userData.professionalDetails.specialty} courses`);
+    if (userData) {
+      searchCourses(
+        `${userData.userData.professionalDetails.specialty} courses`
+      );
     }
   }, [userData]);
+
+  // useEffect(() => {
+  //   if (userData && userData.preferences.explored.courses.length > 0) {
+  //     setData(userData.preferences.explored.courses);
+  //   }
+  // }, [data, userData]);
 
   return (
     <div
@@ -98,7 +140,7 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
         <ButtonPrimary
           onClick={() =>
             searchCourses(
-              `${user.userData.professionalDetails.specialty} courses`
+              `${userData.userData.professionalDetails.specialty} courses`
             )
           }
           loading={loading}

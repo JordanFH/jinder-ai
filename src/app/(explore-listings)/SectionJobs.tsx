@@ -1,18 +1,19 @@
 "use client";
 
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, use, useEffect, useState } from "react";
 import Heading2 from "@/shared/Heading2";
-import PropertyCardH from "@/components/PropertyCardH";
+import CarCard from "@/components/CarCard";
 import { getUserByEmail, useUser } from "@/providers/UserProvider";
 import Link from "next/link";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import { v4 as uuidv4 } from "uuid";
+import { updateUserByEmail } from "../(account-pages)/account/page";
 
-export interface SectionJobsProps {
+export interface SectionCoursesProps {
   className?: string;
 }
 
-const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
+const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
@@ -21,35 +22,36 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
 
   const [userData, setUserData] = useState<any>(null);
 
-  const searchJobs = async (query: any, location: any) => {
+  const searchJobs = async (query: any) => {
     setLoading(true);
     setDisabled(true);
 
     try {
-      const response = await fetch("/api/searchJobs", {
+      const response = await fetch("/api/search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ query, location }),
+        body: JSON.stringify({ query }),
       });
 
       if (!response.ok) {
         throw new Error("Failed to fetch jobs");
       }
 
-      let { status, result } = await response.json();
+      let { success, result } = await response.json();
 
-      if (!status) {
+      if (!success) {
         throw new Error("Failed to fetch jobs");
       }
 
-      // add id to each job
-      result.forEach((job: any) => {
-        job.id = uuidv4();
+      // add id to each course
+      result.forEach((course: any) => {
+        course.id = uuidv4();
       });
 
       setData(result);
+      handleUpdateInfo(result);
 
       setLoading(false);
       setDisabled(false);
@@ -58,35 +60,72 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
     }
   };
 
+  const handleUpdateInfo = (data: any) => {
+    const updatedUser = {
+      ...userData,
+      preferences: {
+        ...userData.preferences,
+        explored: {
+          ...userData.preferences.explored,
+          jobs: data,
+        },
+      },
+    };
+
+    updateUserByEmail(userData.email, updatedUser)
+      .then(() => {
+        setLoading(false);
+        setDisabled(false);
+      })
+      .catch((error) => {
+        console.error("Error updating document: ", error);
+        setLoading(false);
+        setDisabled(false);
+      });
+  };
+
   useEffect(() => {
     if (!userData) {
-      getUserByEmail(user.email).then((user) => {
-        if (user) {
-          setUserData(user);
-        }
-      });
+      setLoading(true);
+      setDisabled(true);
+
+      getUserByEmail(user.email)
+        .then((user) => {
+          if (user) {
+            setUserData(user);
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+          setDisabled(false);
+        });
     }
   }, [user, userData]);
 
   useEffect(() => {
-    if (userData && userData.userData.professionalDetails.specialty !== "") {
+    if (userData) {
       searchJobs(
-        `${userData.userData.professionalDetails.specialty} jobs`,
-        `${userData.country}`
+        `${userData.country} ${userData.userData.professionalDetails.specialty} linkedin jobs`
       );
     }
   }, [userData]);
 
-  return (
-    <div className={`nc-SectionGridFilterCard ${className}`}>
-      <Heading2
-        heading="Jobs"
-        subHeading="Available jobs based on your preferences"
-      />
+  // useEffect(() => {
+  //   if (userData && userData.preferences.explored.jobs.length > 0) {
+  //     setData(userData.preferences.explored.jobs);
+  //   }
+  // }, [data, userData]);
 
-      <div className="grid grid-cols-1 gap-6 md:gap-8 xl:grid-cols-2 ">
-        {data.map((job) => (
-          <PropertyCardH key={job.id} data={job} />
+  return (
+    <div
+      className={`nc-SectionGridFilterCard ${className}`}
+      data-nc-id="SectionGridFilterCard"
+    >
+      <Heading2 heading="Jobs" subHeading="Recommended jobs for you" />
+
+      <div className="grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {data.map((course) => (
+          <CarCard key={course.id} data={course} />
         ))}
       </div>
       {data.length === 0 && (
@@ -101,8 +140,7 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
         <ButtonPrimary
           onClick={() =>
             searchJobs(
-              `${userData.userData.professionalDetails.specialty} jobs`,
-              `${userData.country}`
+              `${userData.country} ${userData.userData.professionalDetails.specialty} linkedin jobs`
             )
           }
           loading={loading}
