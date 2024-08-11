@@ -23,9 +23,7 @@ type UserContextType = {
   country: string;
   city: string;
   preferences: UserPreferences;
-  setPreferences: (prefs: UserPreferences) => void;
   userData: any;
-  setUserData: (cv: any) => void;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -41,11 +39,6 @@ const getUserByEmail = async (email: string) => {
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: session } = useSession();
-
-  const [personalInformation, setPersonalInformation] = useState({
-    country: "",
-    city: "",
-  });
 
   const [preferences, setPreferences] = useState<UserPreferences>({
     isFirstTime: true,
@@ -94,7 +87,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
           setUserData(user.userData);
         } else {
           console.log("Creating new user");
-          
+
           const newUser = {
             email: session?.user?.email,
             name: session?.user?.name,
@@ -122,9 +115,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         country: country,
         city: city,
         preferences,
-        setPreferences,
         userData,
-        setUserData,
       }}
     >
       {children}

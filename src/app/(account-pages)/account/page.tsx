@@ -8,6 +8,7 @@ import Select from "@/shared/Select";
 import Textarea from "@/shared/Textarea";
 import FileUpload from "@/components/FileUpload";
 import { useUser } from "@/providers/UserProvider";
+import { updateDocumentByCondition } from "@/firebase/utils";
 
 export interface AccountPageProps {}
 
@@ -25,10 +26,18 @@ const renderLabel = (text: string, onRemove: () => void) => {
   );
 };
 
+const updateUserByEmail = async (email: string, values: any) => {
+  await updateDocumentByCondition("users", "email", email, values);
+};
+
 const AccountPage = () => {
   const user = useUser();
 
   const { professionalDetails, abilities } = user.userData;
+
+  // Config
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   // User CV file
   const [file, setFile] = useState<File | null>(null);
@@ -55,6 +64,9 @@ const AccountPage = () => {
   };
 
   const handleUpdateInfo = () => {
+    setLoading(true);
+    setDisabled(true);
+
     const updatedUser = {
       ...user,
       country,
@@ -74,7 +86,16 @@ const AccountPage = () => {
       },
     };
 
-    console.log(updatedUser);
+    updateUserByEmail(user.email, updatedUser)
+      .then(() => {
+        setLoading(false);
+        setDisabled(false);
+      })
+      .catch((error) => {
+        console.error("Error updating document: ", error);
+        setLoading(false);
+        setDisabled(false);
+      });
   };
 
   useEffect(() => {
@@ -287,7 +308,11 @@ const AccountPage = () => {
             </div>
             {/* ---- */}
             <div className="pt-2">
-              <ButtonPrimary onClick={() => handleUpdateInfo()}>
+              <ButtonPrimary
+                onClick={() => handleUpdateInfo()}
+                loading={loading}
+                disabled={disabled}
+              >
                 Update info
               </ButtonPrimary>
             </div>
