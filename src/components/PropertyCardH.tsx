@@ -19,66 +19,35 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
   className = "",
   data = DEMO_DATA,
 }) => {
-  const {
-    galleryImgs,
-    title,
-    href,
-    like,
-    saleOff,
-    isAds,
-    price,
-    reviewStart,
-    reviewCount,
-    id,
-  } = data;
-
-  const renderSliderGallery = () => {
-    return (
-      <div className="flex-shrink-0 p-3 w-full sm:w-64 ">
-        <GallerySlider
-          ratioClass="aspect-w-1 aspect-h-1"
-          galleryImgs={galleryImgs}
-          className="w-full h-full rounded-2xl overflow-hidden"
-          uniqueID={`PropertyCardH_${id}`}
-          href={href}
-        />
-
-        {saleOff && (
-          <SaleOffBadge className="absolute left-5 top-5 !bg-orange-500" />
-        )}
-      </div>
-    );
-  };
-
   const renderTienIch = () => {
     return (
-      <div className="inline-grid grid-cols-3 gap-2">
+      <div className="block space-y-4">
         <div className="flex items-center space-x-2">
-          <span className="hidden sm:inline-block">
+          <span className="inline-block">
             <i className="las la-bed text-lg"></i>
           </span>
-          <span className="text-xs text-neutral-500 dark:text-neutral-400">
-            6 beds
+          <span className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
+            Contract type:
           </span>
         </div>
 
         {/* ---- */}
         <div className="flex items-center space-x-2">
-          <span className="hidden sm:inline-block">
+          <span className="inline-block">
             <i className="las la-bath text-lg"></i>
           </span>
-          <span className="text-xs text-neutral-500 dark:text-neutral-400">
-            3 baths
+          <span className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
+            Requirements:
           </span>
         </div>
 
         {/* ---- */}
         <div className="flex items-center space-x-2">
-          <span className="hidden sm:inline-block">
+          <span className="inline-block">
             <i className="las la-expand-arrows-alt text-lg"></i>
           </span>
-          <span className="text-xs text-neutral-500 dark:text-neutral-400">
-            1200 Sq. Fit
+          <span className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
+            Description:
           </span>
         </div>
       </div>
@@ -93,34 +62,34 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
             <Badge
               name={
                 <div className="flex items-center">
-                  <i className="text-sm las la-share-alt"></i>
-                  <span className="ml-1">4 Network</span>
+                  <i className="text-sm las la-briefcase"></i>
+                  <span className="ml-1">Company</span>
                 </div>
               }
             />
             <Badge
               name={
                 <div className="flex items-center">
-                  <i className="text-sm las la-user-friends"></i>
-                  <span className="ml-1">Family</span>
+                  <i className="text-sm las la-map-marker"></i>
+                  <span className="ml-1">Location</span>
                 </div>
               }
               color="yellow"
             />
           </div>
           <div className="flex items-center space-x-2">
-            {isAds && <Badge name="ADS" color="green" />}
             <h2 className="text-lg font-medium capitalize">
-              <span className="line-clamp-2">{title}</span>
+              <span className="line-clamp-2">
+                Position
+              </span>
             </h2>
           </div>
           {renderTienIch()}
           <div className="w-14 border-b border-neutral-200/80 dark:border-neutral-700 "></div>
-          <div className="flex w-full justify-between items-end">
-            <StartRating reviewCount={reviewCount} point={reviewStart} />
-            <span className="flex items-center justify-center px-2.5 py-1.5 border-2 border-secondary-500 rounded-lg leading-none text-sm font-medium text-secondary-500">
-              {`${price},000`}
-            </span>
+          <div className="flex w-full justify-end items-end">
+            <button className="flex items-center justify-center px-4 py-2 border-2 border-secondary-500 rounded-lg leading-none font-medium text-secondary-500 hover:bg-secondary-500 hover:text-white transition-colors duration-200">
+              Apply
+            </button>
           </div>
         </div>
       </div>
@@ -131,14 +100,11 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
     <div
       className={`nc-PropertyCardH group relative bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-700 rounded-3xl overflow-hidden ${className}`}
     >
-      <Link href={href} className="absolute inset-0"></Link>
       <div className="h-full w-full flex flex-col sm:flex-row sm:items-center">
-        {renderSliderGallery()}
         {renderContent()}
       </div>
       <BtnLikeIcon
         colorClass={` bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 hover:bg-opacity-70 text-neutral-600 dark:text-neutral-400`}
-        isLiked={like}
         className="absolute right-5 top-5 sm:right-3 sm:top-3 "
       />
     </div>

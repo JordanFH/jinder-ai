@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import {default as JobsListing} from "../SectionGridFilterCard";
-import {default as CoursesListing} from "@/app/(real-estate-listings)/SectionGridFilterCard";
+import {default as CoursesListing} from "../SectionGridFilterCard";
+import {default as JobsListing} from "@/app/(real-estate-listings)/SectionGridFilterCard";
 import { Metadata } from "next";
 import { APP_NAME } from "@/constants/app";
 
