@@ -7,7 +7,7 @@ import { useUser } from "@/providers/UserProvider";
 import Link from "next/link";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import { v4 as uuidv4 } from "uuid";
-import { updateUserByEmail } from "../(account-pages)/account/page";
+// import { updateUserByEmail } from "../(account-pages)/account/page";
 
 export interface SectionCoursesProps {
   className?: string;
@@ -49,39 +49,47 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
       });
 
       setData(result);
-      handleUpdateInfo(result);
+      // handleUpdateInfo(result);
+
+      setLoading(false);
+      setDisabled(false);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleUpdateInfo = (data: any) => {
-    const updatedUser = {
-      ...user,
-      preferences: {
-        ...user.preferences,
-        explored: {
-          ...user.preferences.explored,
-          courses: data,
-        },
-      },
-    };
+  // const handleUpdateInfo = (data: any) => {
+  //   const updatedUser = {
+  //     ...user,
+  //     preferences: {
+  //       ...user.preferences,
+  //       explored: {
+  //         ...user.preferences.explored,
+  //         courses: data,
+  //       },
+  //     },
+  //   };
 
-    updateUserByEmail(user.email, updatedUser)
-      .then(() => {
-        setLoading(false);
-        setDisabled(false);
-      })
-      .catch((error) => {
-        console.error("Error updating document: ", error);
-        setLoading(false);
-        setDisabled(false);
-      });
-  };
+  //   updateUserByEmail(user.email, updatedUser)
+  //     .then(() => {
+  //       setLoading(false);
+  //       setDisabled(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error updating document: ", error);
+  //       setLoading(false);
+  //       setDisabled(false);
+  //     });
+  // };
 
   useEffect(() => {
-    if (user) {      
-      setData(user.preferences.explored.courses);
+    // if (user) {
+    //   setData(user.preferences.explored.courses);
+    // }
+    if (user && user.userData.professionalDetails.specialty !== "") {
+      console.log(`${user.userData.professionalDetails.specialty} courses`);
+
+      searchCourses(`${user.userData.professionalDetails.specialty} courses`);
     }
   }, [user]);
 
@@ -107,7 +115,11 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
       )}
       <div className="mt-6 w-100 text-center">
         <ButtonPrimary
-          onClick={() => searchCourses("javascript courses")}
+          onClick={() =>
+            searchCourses(
+              `${user.userData.professionalDetails.specialty} courses`
+            )
+          }
           loading={loading}
           disabled={disabled}
         >
