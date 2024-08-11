@@ -4,12 +4,13 @@ import React, { FC, useState } from "react";
 
 interface Props {
   className?: string;
+  file: File | null;
+  setFile: (file: File | null) => void;
 }
 
-const FileUpload: FC<Props> = ({ className = "" }) => {
-  const [file, setFile] = useState<File | null>(null);
+const FileUpload: FC<Props> = ({ className = "", file, setFile }) => {
   const [error, setError] = useState<string | null>(null);
-
+  
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const droppedFile = event.dataTransfer.files[0];
