@@ -4,7 +4,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json(); // Parse the incoming request body
     const response = await fetch(
-      "https://api-google.apps.ecocont.pe/searchCourses",
+      "https://api-google-scraping.up.railway.app/api/jobScraper",
       {
         method: "POST",
         headers: {
@@ -15,14 +15,14 @@ export async function POST(req: NextRequest) {
     );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch courses");
+      throw new Error("Failed to fetch jobs");
     }
 
     const data = await response.json();
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to fetch courses" },
+      { error: "Failed to fetch jobs" },
       { status: 500 }
     );
   }
