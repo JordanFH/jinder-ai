@@ -1,33 +1,29 @@
 import React, { FC } from "react";
-import { DEMO_CAR_LISTINGS } from "@/data/listings";
-import { CarDataType } from "@/data/types";
-import StartRating from "@/components/StartRating";
 import BtnLikeIcon from "@/components/BtnLikeIcon";
-import SaleOffBadge from "@/components/SaleOffBadge";
-import Badge from "@/shared/Badge";
 import Image from "next/image";
-import Link from "next/link";
 
 export interface CarCardProps {
   className?: string;
-  data?: CarDataType;
+  data?: any;
   size?: "default" | "small";
 }
-
-const DEMO_DATA: CarDataType = DEMO_CAR_LISTINGS[0];
 
 const CarCard: FC<CarCardProps> = ({
   size = "default",
   className = "",
-  data = DEMO_DATA,
+  data = [],
 }) => {
   const renderSliderGallery = () => {
     return (
       <div className="relative w-full rounded-2xl overflow-hidden">
-        <div className="aspect-w-16 aspect-h-9 ">
+        <div className="aspect-w-16 aspect-h-9">
           <Image
             fill
-            src="https://s.udemycdn.com/meta/default-meta-image-v2.png"
+            src={
+              data.pagemap
+                ? data.pagemap
+                : "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2023/02/how-to-create-online-course.webp"
+            }
             alt="course"
             sizes="(max-width: 640px) 100vw, 350px"
           />
@@ -49,16 +45,16 @@ const CarCard: FC<CarCardProps> = ({
                   : "text-base font-medium"
               }`}
             >
-              <span className="line-clamp-1">Title</span>
+              <span className="line-clamp-1">{data.title}</span>
             </h2>
           </div>
           <div className="flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-2">
-            Snippets
+            {data.snippet}
           </div>
         </div>
         <div className="flex w-full justify-end items-end">
           <a
-            href="/"
+            href={data.link}
             target="_blank"
             className="flex items-center justify-center px-6 py-2 border-2 border-primary-500 rounded-lg leading-none font-medium text-primary-500 hover:bg-primary-500 hover:text-white transition-colors duration-200"
           >
