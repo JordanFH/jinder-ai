@@ -49,7 +49,7 @@ const AccountPage = () => {
   // Professional details
   const [specialty, setSpecialty] = useState<string>("");
   const [currentLevel, setCurrentLevel] = useState<string>("");
-  const [yearsOfExperience, setYearsOfExperience] = useState<number>(0);
+  const [yearsOfExperience, setYearsOfExperience] = useState<string>("");
   const [summary, setSummary] = useState<string>("");
   // Abilities and skills
   const [skills, setSkills] = useState<string[]>([]);
@@ -109,7 +109,7 @@ const AccountPage = () => {
         ? professionalDetails.currentLevel
         : "Junior"
     );
-    setYearsOfExperience(Number(professionalDetails.yearsExperience));
+    setYearsOfExperience(professionalDetails.yearsExperience);
     setSummary(professionalDetails.summary);
     setSkills(abilities.skills);
     setLanguages(abilities.languages);
@@ -129,7 +129,7 @@ const AccountPage = () => {
             <div>
               <Label>Name</Label>
               <Input
-                className="mt-1.5 bg-gray-300 dark:bg-gray-500"
+                className="mt-1.5 bg-gray-300 dark:bg-gray-400 cursor-not-allowed"
                 defaultValue={name}
                 disabled
                 onChange={(e) => setName(e.target.value)}
@@ -139,7 +139,7 @@ const AccountPage = () => {
             <div>
               <Label>Email</Label>
               <Input
-                className="mt-1.5 bg-gray-300 dark:bg-gray-500"
+                className="mt-1.5 bg-gray-300 dark:bg-gray-400 cursor-not-allowed"
                 defaultValue={email}
                 disabled
                 onChange={(e) => setEmail(e.target.value)}
@@ -199,10 +199,10 @@ const AccountPage = () => {
               <Input
                 className="mt-1.5"
                 type="number"
-                defaultValue={Number(yearsOfExperience)}
+                defaultValue={yearsOfExperience}
                 min="1"
                 max="100"
-                onChange={(e) => setYearsOfExperience(Number(e.target.value))}
+                onChange={(e) => setYearsOfExperience(e.target.value)}
               />
             </div>
             {/* ---- */}
