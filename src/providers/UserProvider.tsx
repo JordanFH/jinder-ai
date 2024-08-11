@@ -68,42 +68,44 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
 
-  fetch("https://api.bigdatacloud.net/data/reverse-geocode-client")
-    .then((response) => response.json())
-    .then((data) => {
-      setCountry(data.countryName);
-      setCity(data.city);
-    });
-
   useEffect(() => {
-    if (session) {
-      const email = session?.user?.email || "";
+    fetch("https://api.bigdatacloud.net/data/reverse-geocode-client")
+      .then((response) => response.json())
+      .then((data) => {
+        setCountry(data.countryName);
+        setCity(data.city);
 
-      getUserByEmail(email).then((user) => {
-        if (user) {
-          console.log("User already exists");
+        if (session) {
+          const email = session?.user?.email || "";
 
-          setPreferences(user.preferences);
-          setUserData(user.userData);
-        } else {
-          console.log("Creating new user");
+          getUserByEmail(email).then((user) => {
+            if (user) {
+              console.log("User already exists");
 
-          const newUser = {
-            email: session?.user?.email,
-            name: session?.user?.name,
-            image: session?.user?.image,
-            country: country,
-            city: city,
-            userData,
-            preferences,
-          };
-          createUser(newUser);
+              setCountry(user.country);
+              setCity(user.city);
+              setPreferences(user.preferences);
+              setUserData(user.userData);
+            } else {
+              console.log("Creating new user");
 
-          setPreferences(newUser.preferences);
-          setUserData(newUser.userData);
+              const newUser = {
+                email: session?.user?.email,
+                name: session?.user?.name,
+                image: session?.user?.image,
+                country: data.countryName,
+                city: data.city,
+                userData,
+                preferences,
+              };
+              createUser(newUser);
+
+              setPreferences(newUser.preferences);
+              setUserData(newUser.userData);
+            }
+          });
         }
       });
-    }
   }, [session]);
 
   return (

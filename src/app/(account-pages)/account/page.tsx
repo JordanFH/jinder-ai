@@ -199,7 +199,7 @@ const AccountPage = () => {
               <Input
                 className="mt-1.5"
                 type="number"
-                defaultValue={yearsOfExperience.toString()}
+                defaultValue={Number(yearsOfExperience)}
                 min="1"
                 max="100"
                 onChange={(e) => setYearsOfExperience(Number(e.target.value))}
