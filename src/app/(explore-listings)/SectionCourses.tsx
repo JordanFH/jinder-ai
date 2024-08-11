@@ -1,12 +1,12 @@
 "use client";
 
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, use, useEffect, useState } from "react";
 import Heading2 from "@/shared/Heading2";
 import CarCard from "@/components/CarCard";
 import { useUser } from "@/providers/UserProvider";
 import Link from "next/link";
 import ButtonPrimary from "@/shared/ButtonPrimary";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 export interface SectionCoursesProps {
   className?: string;
@@ -14,11 +14,8 @@ export interface SectionCoursesProps {
 }
 
 const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
-  const { preferences } = useUser();
-
-  const { courses } = preferences.explored;
-
-  const [data, setData] = useState<any[]>([]);
+  const user = useUser();
+  const [data, setData] = useState<any[]>(user.preferences.explored.courses);
 
   const searchCourses = async (query: any) => {
     try {
@@ -34,15 +31,18 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
         throw new Error("Failed to fetch courses");
       }
 
-      const {success, result} = await response.json();
+      let { success, result } = await response.json();
 
       if (!success) {
         throw new Error("Failed to fetch courses");
       }
 
+      // add id to each course
+      result.forEach((course: any) => {
+        course.id = uuidv4();
+      });
+
       setData(result);
-      
-      // setData(data);
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +69,9 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
         </p>
       )}
       <div className="mt-6 w-100 text-center">
-        <ButtonPrimary onClick={() => searchCourses('javascript courses')}>Refresh</ButtonPrimary>
+        <ButtonPrimary onClick={() => searchCourses("javascript courses")}>
+          Refresh
+        </ButtonPrimary>
       </div>
     </div>
   );

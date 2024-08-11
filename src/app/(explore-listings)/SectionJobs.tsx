@@ -17,7 +17,7 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
 
   const { jobs } = preferences.explored;
 
-  console.log(jobs);
+  // console.log(jobs);
 
   return (
     <div className={`nc-SectionGridFilterCard ${className}`}>
