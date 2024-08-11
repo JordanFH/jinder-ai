@@ -7,17 +7,23 @@ import { useUser } from "@/providers/UserProvider";
 import Link from "next/link";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import { v4 as uuidv4 } from "uuid";
+import { updateUserByEmail } from "../(account-pages)/account/page";
 
 export interface SectionCoursesProps {
   className?: string;
-  data?: any[];
 }
 
 const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+
   const user = useUser();
-  const [data, setData] = useState<any[]>(user.preferences.explored.courses);
+  const [data, setData] = useState<any[]>([]);
 
   const searchCourses = async (query: any) => {
+    setLoading(true);
+    setDisabled(true);
+
     try {
       const response = await fetch("/api/searchCourses", {
         method: "POST",
@@ -43,10 +49,43 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
       });
 
       setData(result);
+      handleUpdateInfo(result);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const handleUpdateInfo = (data: any) => {
+    const updatedUser = {
+      ...user,
+      preferences: {
+        ...user.preferences,
+        explored: {
+          ...user.preferences.explored,
+          courses: data,
+        },
+      },
+    };
+
+    updateUserByEmail(user.email, updatedUser)
+      .then(() => {
+        setLoading(false);
+        setDisabled(false);
+      })
+      .catch((error) => {
+        console.error("Error updating document: ", error);
+        setLoading(false);
+        setDisabled(false);
+      });
+  };
+
+  useEffect(() => {
+    if (user) {
+      console.log(user.preferences.explored.courses);
+      
+      setData(user.preferences.explored.courses);
+    }
+  }, [user]);
 
   return (
     <div
@@ -69,7 +108,11 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
         </p>
       )}
       <div className="mt-6 w-100 text-center">
-        <ButtonPrimary onClick={() => searchCourses("javascript courses")}>
+        <ButtonPrimary
+          onClick={() => searchCourses("javascript courses")}
+          loading={loading}
+          disabled={disabled}
+        >
           Refresh
         </ButtonPrimary>
       </div>

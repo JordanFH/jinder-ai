@@ -26,7 +26,7 @@ const renderLabel = (text: string, onRemove: () => void) => {
   );
 };
 
-const updateUserByEmail = async (email: string, values: any) => {
+export const updateUserByEmail = async (email: string, values: any) => {
   await updateDocumentByCondition("users", "email", email, values);
 };
 
