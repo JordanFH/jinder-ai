@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import {default as CoursesListing} from "../SectionGridFilterCard";
-import {default as JobsListing} from "@/app/(real-estate-listings)/SectionGridFilterCard";
+import SectionCourses from "../SectionCourses";
+import SectionJobs from "../SectionJobs";
 import { Metadata } from "next";
 import { APP_NAME } from "@/constants/app";
 
@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 const ListingStayPage: FC<ListingStayPageProps> = () => {
   return (
     <>
-      <JobsListing className="container py-10 lg:py-12" />
-      <CoursesListing className="container py-10 lg:py-12" />
+      <SectionJobs className="container py-10 lg:py-12" />
+      <SectionCourses className="container py-10 lg:py-12" />
     </>
   );
 };

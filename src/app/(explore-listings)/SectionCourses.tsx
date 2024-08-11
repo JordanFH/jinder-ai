@@ -4,14 +4,14 @@ import { CarDataType } from "@/data/types";
 import Heading2 from "@/shared/Heading2";
 import CarCard from "@/components/CarCard";
 
-export interface SectionGridFilterCardProps {
+export interface SectionCoursesProps {
   className?: string;
   data?: CarDataType[];
 }
 
 const DEMO_DATA: CarDataType[] = DEMO_CAR_LISTINGS.filter((_, i) => i < 8);
 
-const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({
+const SectionGridFilterCard: FC<SectionCoursesProps> = ({
   className = "",
   data = DEMO_DATA,
 }) => {
