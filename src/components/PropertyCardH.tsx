@@ -48,7 +48,8 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
             <span className="text-xs font-semibold">Description:</span>
           </div>
           <span className="text-sm text-neutral-600 dark:text-neutral-500">
-            {data.description.replace("Show full description", "")}{" "}
+            {data.description &&
+              data.description.replace("Show full description", "")}
           </span>
         </div>
       </div>
