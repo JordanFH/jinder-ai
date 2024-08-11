@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { createDocument, fetchDocumentByCondition } from "@/firebase/utils";
+import { updateUserByEmail } from "@/app/(account-pages)/account/page";
 
 type UserPreferences = {
   isFirstTime: boolean;
@@ -80,14 +81,28 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
           getUserByEmail(email).then((user) => {
             if (user) {
-              console.log("User already exists");
+              // console.log("User already exists");
 
               setCountry(user.country);
               setCity(user.city);
               setPreferences(user.preferences);
               setUserData(user.userData);
+
+              if (user.preferences.isFirstTime) {
+                // console.log("First time user");
+
+                const updatedUser = {
+                  ...user,
+                  preferences: {
+                    ...user.preferences,
+                    isFirstTime: false,
+                  },
+                };
+
+                updateUserByEmail(email, updatedUser);
+              }
             } else {
-              console.log("Creating new user");
+              // console.log("Creating new user");
 
               const newUser = {
                 email: session?.user?.email,

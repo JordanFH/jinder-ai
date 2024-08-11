@@ -19,7 +19,7 @@ export const createDocument = async (
   data: DocumentData
 ): Promise<void> => {
   await addDoc(collection(db, collectionName), data);
-  console.log("Document created");
+  // console.log("Document created");
 };
 
 // Function to fetch all documents from a collection
@@ -99,7 +99,7 @@ export const updateDocumentById = async (
 ): Promise<void> => {
   const docRef = doc(db, collectionName, docId);
   await updateDoc(docRef, data);
-  console.log("Document updated:", docId);
+  // console.log("Document updated:", docId);
 };
 
 // Function to update a single document by a condition
@@ -119,9 +119,9 @@ export const updateDocumentByCondition = async (
     const docSnapshot = querySnapshot.docs[0];
     const docRef = docSnapshot.ref;
     await updateDoc(docRef, data);
-    console.log("Document updated:", docSnapshot.id);
+    // console.log("Document updated:", docSnapshot.id);
   } else {
-    console.log("No document found matching the condition");
+    // console.log("No document found matching the condition");
   }
 };
 
@@ -145,7 +145,7 @@ export const updateDocumentsByCondition = async (
   });
 
   await batch.commit();
-  console.log('Documents updated based on condition');
+  // console.log('Documents updated based on condition');
 };
 
 // Function to delete a document by ID
@@ -155,7 +155,7 @@ export const deleteDocumentById = async (
 ): Promise<void> => {
   const docRef = doc(db, collectionName, docId);
   await deleteDoc(docRef);
-  console.log("Document deleted:", docId);
+  // console.log("Document deleted:", docId);
 };
 
 // Function to delete a single document by a condition
@@ -174,9 +174,9 @@ export const deleteDocumentByCondition = async (
     const docSnapshot = querySnapshot.docs[0];
     const docRef = docSnapshot.ref;
     await deleteDoc(docRef);
-    console.log("Document deleted:", docSnapshot.id);
+    // console.log("Document deleted:", docSnapshot.id);
   } else {
-    console.log("No document found matching the condition");
+    // console.log("No document found matching the condition");
   }
 };
 
@@ -199,5 +199,5 @@ export const deleteDocumentsByCondition = async (
   });
 
   await batch.commit();
-  console.log('Documents deleted based on condition');
+  // console.log('Documents deleted based on condition');
 };

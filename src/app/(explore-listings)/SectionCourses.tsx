@@ -51,7 +51,7 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
       setData(result);
       handleUpdateInfo(result);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -80,9 +80,7 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
   };
 
   useEffect(() => {
-    if (user) {
-      console.log(user.preferences.explored.courses);
-      
+    if (user) {      
       setData(user.preferences.explored.courses);
     }
   }, [user]);
