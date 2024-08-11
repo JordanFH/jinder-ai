@@ -1,19 +1,15 @@
 import React, { FC } from "react";
-import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import BtnLikeIcon from "@/components/BtnLikeIcon";
 import Badge from "@/shared/Badge";
-import { StayDataType } from "@/data/types";
 
 export interface PropertyCardHProps {
   className?: string;
-  data?: StayDataType;
+  data?: any;
 }
-
-const DEMO_DATA = DEMO_STAY_LISTINGS[0];
 
 const PropertyCardH: FC<PropertyCardHProps> = ({
   className = "",
-  data = DEMO_DATA,
+  data = {},
 }) => {
   const renderTienIch = () => {
     return (
@@ -26,7 +22,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
             <span className="text-xs font-semibold">Contract type:</span>
           </div>
           <span className="text-sm text-neutral-600 dark:text-neutral-500">
-            lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
+            {data.contractType}
           </span>
         </div>
 
@@ -39,7 +35,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
             <span className="text-xs font-semibold">Requirements:</span>
           </div>
           <span className="text-sm text-neutral-600 dark:text-neutral-500">
-            lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
+            {data.requirements}
           </span>
         </div>
 
@@ -52,7 +48,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
             <span className="text-xs font-semibold">Description:</span>
           </div>
           <span className="text-sm text-neutral-600 dark:text-neutral-500">
-            lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
+            {data.description.replace("Show full description", "")}{" "}
           </span>
         </div>
       </div>
@@ -68,7 +64,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
               name={
                 <div className="flex items-center">
                   <i className="text-sm las la-briefcase"></i>
-                  <span className="ml-1">Company</span>
+                  <span className="ml-1">{data.company}</span>
                 </div>
               }
             />
@@ -76,7 +72,7 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
               name={
                 <div className="flex items-center">
                   <i className="text-sm las la-map-marker"></i>
-                  <span className="ml-1">Location</span>
+                  <span className="ml-1">{data.location}</span>
                 </div>
               }
               color="yellow"
@@ -84,13 +80,13 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
           </div>
           <div className="flex items-center space-x-2">
             <h2 className="text-lg font-medium capitalize">
-              <span className="line-clamp-2">Position</span>
+              <span className="line-clamp-2">{data.position}</span>
             </h2>
           </div>
           {renderTienIch()}
           <div className="flex w-full justify-end items-end">
             <a
-              href="/"
+              href={data.links}
               target="_blank"
               className="flex items-center justify-center px-6 py-2 border-2 border-primary-500 rounded-lg leading-none font-medium text-primary-500 hover:bg-primary-500 hover:text-white transition-colors duration-200"
             >

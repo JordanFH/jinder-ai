@@ -57,7 +57,7 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
   };
 
   useEffect(() => {
-    if (user && user.userData.professionalDetails.specialty !== "") {
+    if (user && user.userData.professionalDetails.specialty !== "" && user.country !== "") {      
       searchJobs(
         `${user.userData.professionalDetails.specialty} jobs`,
         `${user.country}`
