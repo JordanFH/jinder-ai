@@ -2,18 +2,15 @@
 
 import { Tab } from "@headlessui/react";
 import CarCard from "@/components/CarCard";
-import ExperiencesCard from "@/components/ExperiencesCard";
-import StayCard from "@/components/StayCard";
 import {
   DEMO_CAR_LISTINGS,
-  DEMO_EXPERIENCES_LISTINGS,
   DEMO_STAY_LISTINGS,
 } from "@/data/listings";
 import React, { Fragment, useState } from "react";
-import ButtonSecondary from "@/shared/ButtonSecondary";
+import PropertyCardH from "@/components/PropertyCardH";
 
 const AccountSavelists = () => {
-  let [categories] = useState(["Stays", "Experiences", "Cars"]);
+  let [categories] = useState(["Jobs", "Courses"]);
 
   const renderSection1 = () => {
     return (
@@ -44,25 +41,10 @@ const AccountSavelists = () => {
             </Tab.List>
             <Tab.Panels>
               <Tab.Panel className="mt-8">
-                <div className="grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div className="grid grid-cols-1 gap-6 md:gap-8 xl:grid-cols-2">
                   {DEMO_STAY_LISTINGS.filter((_, i) => i < 8).map((stay) => (
-                    <StayCard key={stay.id} data={stay} />
+                    <PropertyCardH key={stay.id} data={stay} />
                   ))}
-                </div>
-                <div className="flex mt-11 justify-center items-center">
-                  <ButtonSecondary>Show me more</ButtonSecondary>
-                </div>
-              </Tab.Panel>
-              <Tab.Panel className="mt-8">
-                <div className="grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {DEMO_EXPERIENCES_LISTINGS.filter((_, i) => i < 8).map(
-                    (stay) => (
-                      <ExperiencesCard key={stay.id} data={stay} />
-                    )
-                  )}
-                </div>
-                <div className="flex mt-11 justify-center items-center">
-                  <ButtonSecondary>Show me more</ButtonSecondary>
                 </div>
               </Tab.Panel>
               <Tab.Panel className="mt-8">
@@ -70,9 +52,6 @@ const AccountSavelists = () => {
                   {DEMO_CAR_LISTINGS.filter((_, i) => i < 8).map((stay) => (
                     <CarCard key={stay.id} data={stay} />
                   ))}
-                </div>
-                <div className="flex mt-11 justify-center items-center">
-                  <ButtonSecondary>Show me more</ButtonSecondary>
                 </div>
               </Tab.Panel>
             </Tab.Panels>
