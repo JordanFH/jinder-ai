@@ -8,6 +8,7 @@ import "rc-slider/assets/index.css";
 import Footer from "@/components/Footer";
 import FooterNav from "@/components/FooterNav";
 import SessionProvider from "@/providers/SessionProvider";
+import { Toaster } from "react-hot-toast";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -22,17 +23,28 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: any;
 }) {
-
   return (
     <html lang="en" className={poppins.className}>
       <body className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
-      <SessionProvider>
-        <ClientCommons />
-        <SiteHeader />
-        {children}
-        {/* <FooterNav /> */}
-        <Footer />
-      </SessionProvider>
+        <SessionProvider>
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+            toastOptions={{
+              success: {
+                duration: 3000,
+              },
+              error: {
+                duration: 3000,
+              },
+            }}
+          />
+          <ClientCommons />
+          <SiteHeader />
+          {children}
+          {/* <FooterNav /> */}
+          <Footer />
+        </SessionProvider>
       </body>
     </html>
   );

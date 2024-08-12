@@ -1,6 +1,7 @@
 "use client";
 
 import React, { FC, useState } from "react";
+import toast from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
 
 interface Props {
@@ -47,6 +48,7 @@ const FileUpload: FC<Props> = ({
 
     if (selectedFile && selectedFile.type === "application/pdf") {
       if (selectedFile.size <= 5 * 1024 * 1024) {
+        toast.loading("Uploading CV...");
         setFile(selectedFile);
         setError(null);
 
@@ -72,6 +74,7 @@ const FileUpload: FC<Props> = ({
             if (!response.ok) {
               throw new Error("Failed to fetch CV data");
             }
+            toast.dismiss();
 
             let { success, result } = await response.json();
 
@@ -83,6 +86,8 @@ const FileUpload: FC<Props> = ({
 
             setLoading(false);
             setDisabled(false);
+
+            toast.success("CV uploaded successfully!");
           } catch (error) {
             console.error(error);
           }
