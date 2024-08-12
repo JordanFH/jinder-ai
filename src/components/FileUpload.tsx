@@ -23,41 +23,19 @@ const FileUpload: FC<Props> = ({
 }) => {
   const [error, setError] = useState<string | null>(null);
 
-  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    const droppedFile = event.dataTransfer.files[0];
-
-    if (droppedFile && droppedFile.type === "application/pdf") {
-      if (droppedFile.size <= 5 * 1024 * 1024) {
-        setFile(droppedFile);
-        setError(null);
-      } else {
-        setError("File size exceeds 5MB limit.");
-      }
-    } else {
-      setError("Only PDF files are allowed.");
-    }
-  };
-
-  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-  };
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0];
-
-    if (selectedFile && selectedFile.type === "application/pdf") {
-      if (selectedFile.size <= 5 * 1024 * 1024) {
+  const handleFileUpload = async (file: any) => {
+    if (file && file.type === "application/pdf") {
+      if (file.size <= 5 * 1024 * 1024) {
         toast.loading("Uploading CV...");
-        setFile(selectedFile);
+        setFile(file);
         setError(null);
 
         setLoading(true);
         setDisabled(true);
 
-        // parse selectedFile to base64
+        // parse file to base64
         const reader = new FileReader();
-        reader.readAsDataURL(selectedFile);
+        reader.readAsDataURL(file);
         reader.onload = async () => {
           let base64 = reader.result as string;
           base64 = base64.split(",")[1];
@@ -102,6 +80,23 @@ const FileUpload: FC<Props> = ({
       setError("Only PDF files are allowed.");
       toast.error("Only PDF files are allowed.");
     }
+  };
+
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const droppedFile = event.dataTransfer.files[0];
+
+    handleFileUpload(droppedFile);
+  };
+
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+
+    handleFileUpload(selectedFile);
   };
 
   return (
