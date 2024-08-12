@@ -5,6 +5,8 @@ import React, { FC } from "react";
 import ButtonSecondary from "@/shared/ButtonSecondary";
 import Image from "next/image";
 import gemini_logo from "@/images/Google_Gemini.svg";
+import Input from "@/shared/Input";
+import ButtonCircle from "@/shared/ButtonCircle";
 
 export interface ChatPageProps {}
 
@@ -27,18 +29,27 @@ const ChatPage: FC<ChatPageProps> = ({}) => {
     return (
       <div className="listingSection__wrap">
         {/* HEADING */}
-        <h2 className="text-2xl font-semibold">Reviews (23 reviews)</h2>
+        <h2 className="text-2xl font-semibold">Gemini AI Chat</h2>
         <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
 
         {/* comment */}
         <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
-          <CommentListing hasListingTitle className="pb-8" />
-          <CommentListing hasListingTitle className="py-8" />
-          <CommentListing hasListingTitle className="py-8" />
-          <CommentListing hasListingTitle className="py-8" />
-          <div className="pt-8">
-            <ButtonSecondary>View more 20 reviews</ButtonSecondary>
-          </div>
+          <CommentListing className="pb-8" />
+          <form className="mt-10 relative">
+            <Input
+              placeholder="Send message"
+              type="email"
+              rounded="rounded-full"
+              sizeClass="h-12 px-5 py-3"
+            />
+            <ButtonCircle
+              type="submit"
+              className="absolute transform top-1/2 -translate-y-1/2 right-1.5"
+              size="w-10 h-10"
+            >
+              <i className="las la-arrow-right text-xl"></i>
+            </ButtonCircle>
+          </form>
         </div>
       </div>
     );
