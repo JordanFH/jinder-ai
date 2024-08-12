@@ -55,26 +55,10 @@ const ChatForm: FC<ChatPageProps> = ({}) => {
         throw new Error("Failed to send message");
       }
 
-      const filteredChatHistory = result.chatHistory.map((item: any) => {
-        const searchText = "The user wants to tell you: ";
-        const index = item.text.indexOf(searchText);
+      localStorage.setItem("chatHistory", JSON.stringify(result.chatHistory));
+      handleUpdateInfo(result.chatHistory);
+      setChatHistory(result.chatHistory);
 
-        // Si el texto existe en la cadena, extraer todo después de este
-        const newText =
-          index !== -1
-            ? item.text.substring(index + searchText.length)
-            : item.text;
-
-        // Devolver el objeto modificado
-        return {
-          ...item,
-          text: newText,
-        };
-      });
-
-      localStorage.setItem("chatHistory", JSON.stringify(filteredChatHistory));
-      handleUpdateInfo(filteredChatHistory);
-      // setChatHistory(filteredChatHistory);
       setMessage("");
       setLoading(false);
       setDisabled(false);
@@ -186,15 +170,27 @@ const ChatForm: FC<ChatPageProps> = ({}) => {
   };
 
   const renderSection2 = () => {
+    const displayChatHistory = chatHistory.map((item: any) => {
+      const searchText = "The user wants to tell you: ";
+      const index = item.text.indexOf(searchText);
+
+      const newText =
+        index !== -1
+          ? item.text.substring(index + searchText.length)
+          : item.text;
+
+      return {
+        ...item,
+        text: newText,
+      };
+    });
+
     return (
       <div className="listingSection__wrap">
-        {/* HEADING */}
         <h2 className="text-2xl font-semibold">Gemini AI Chat</h2>
         <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-
-        {/* comment */}
         <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
-          {chatHistory?.map((data: any, index: number) => (
+          {displayChatHistory.map((data: any, index: number) => (
             <CommentListing
               key={index}
               message={data.text}
@@ -202,9 +198,7 @@ const ChatForm: FC<ChatPageProps> = ({}) => {
               className="pb-8"
             />
           ))}
-          <form
-            className={`relative ${chatHistory?.length > 0 ? "mt-10" : ""}`}
-          >
+          <form className={`relative ${chatHistory.length > 0 ? "mt-10" : ""}`}>
             <Input
               placeholder="Send message"
               type="email"
