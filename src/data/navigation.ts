@@ -283,6 +283,12 @@ export const NAVIGATION: NavItemType[] = [
     name: "Explore",
     type: "none",
   },
+  {
+    id: ncNanoId(),
+    href: "/chat",
+    name: "Chat with Gemini AI",
+    type: "none",
+  },
 ];
 
 export const NAVIGATION_DEMO_2: NavItemType[] = [
