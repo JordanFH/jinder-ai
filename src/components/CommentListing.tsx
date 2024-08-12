@@ -7,12 +7,14 @@ export interface CommentListingProps {
   className?: string;
   message?: string;
   isGemini?: boolean;
+  hasListingTitle?: boolean;
 }
 
 const CommentListing: FC<CommentListingProps> = ({
   className = "",
   message = "",
   isGemini = true,
+  hasListingTitle,
 }) => {
   const user = useUser();
 
