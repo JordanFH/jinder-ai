@@ -14,6 +14,7 @@ type UserPreferences = {
     jobs: any[];
     courses: any[];
   };
+  chat_history: any[];
 };
 
 type UserContextType = {
@@ -41,6 +42,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       jobs: [],
       courses: [],
     },
+    chat_history: [],
   });
 
   const [userData, setUserData] = useState<any>({

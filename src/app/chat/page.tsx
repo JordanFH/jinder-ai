@@ -1,15 +1,65 @@
 "use client";
 
 import CommentListing from "@/components/CommentListing";
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import gemini_logo from "@/images/Google_Gemini.svg";
 import Input from "@/shared/Input";
 import ButtonCircle from "@/shared/ButtonCircle";
+import { getUserByEmail } from "@/utils/userUtils";
+import { useUser } from "@/providers/UserProvider";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "@/firebase/config";
 
 export interface ChatPageProps {}
 
 const ChatPage: FC<ChatPageProps> = ({}) => {
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const [userData, setUserData] = useState<any>(null);
+  const [chatHistory, setChatHistory] = useState([]);
+
+  const user = useUser();
+
+  useEffect(() => {
+    if (!userData) {
+      setLoading(true);
+      setDisabled(true);
+
+      getUserByEmail(user.email)
+        .then((user) => {
+          if (user) {
+            setUserData(user);
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+          setDisabled(false);
+        });
+    }
+  }, [user, userData]);
+
+  useEffect(() => {
+    if (userData) {
+      const unsubscribe = onSnapshot(
+        doc(db, "users", userData.id),
+        (docSnapshot) => {
+          if (docSnapshot.exists()) {
+            const data = docSnapshot.data();
+            if (data.preferences && data.preferences.chat_history) {
+              setChatHistory(data.preferences.chat_history);
+            }
+          }
+        },
+        (error) => {
+          console.error("Error fetching chat history:", error);
+        }
+      );
+
+      return () => unsubscribe();
+    }
+  }, [userData]);
+
   const renderSection1 = () => {
     return (
       <div className="listingSection__wrap w-full flex flex-col items-center text-center sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-7 px-0 sm:p-6 xl:p-8">
