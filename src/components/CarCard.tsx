@@ -6,12 +6,14 @@ export interface CarCardProps {
   className?: string;
   data?: any;
   size?: "default" | "small";
+  isLiked?: boolean;
 }
 
 const CarCard: FC<CarCardProps> = ({
   size = "default",
   className = "",
   data = {},
+  isLiked = false,
 }) => {
   const renderSliderGallery = () => {
     return (
@@ -28,7 +30,10 @@ const CarCard: FC<CarCardProps> = ({
             sizes="(max-width: 640px) 100vw, 350px"
           />
         </div>
-        <BtnLikeIcon className="absolute right-3 top-3 z-[1]" />
+        <BtnLikeIcon
+          isLiked={isLiked}
+          className="absolute right-3 top-3 z-[1]"
+        />
       </div>
     );
   };

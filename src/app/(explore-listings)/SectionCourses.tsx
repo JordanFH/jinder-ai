@@ -40,6 +40,8 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
       toast.dismiss();
 
       if (!response.ok) {
+        setLoading(false);
+        setDisabled(false);
         toast.error("Failed to fetch courses");
         throw new Error("Failed to fetch courses");
       }
@@ -47,6 +49,8 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
       let { success, result } = await response.json();
 
       if (!success) {
+        setLoading(false);
+        setDisabled(false);
         toast.error("Failed to fetch courses");
         throw new Error("Failed to fetch courses");
       }
