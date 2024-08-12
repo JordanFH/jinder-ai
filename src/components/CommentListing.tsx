@@ -55,7 +55,7 @@ const CommentListing: FC<CommentListingProps> = ({
           } space-x-3`}
         >
           <div className="flex flex-col">
-            <div className="text-sm font-semibold">
+            <div className="text-sm font-semibold pt-3">
               <span>{isGemini ? "Gemini AI" : user.name}</span>
             </div>
           </div>
