@@ -42,10 +42,6 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
       if (!response.ok) {
         setLoading(false);
         setDisabled(false);
-        if (userData.preferences.explored.jobs.length > 0) {
-          setData(userData.preferences.explored.jobs);
-          toast.success("Using cached jobs");
-        }
         toast.error("Failed to fetch new jobs");
         throw new Error("Failed to fetch new jobs");
       }
@@ -55,8 +51,6 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
       if (!success) {
         setLoading(false);
         setDisabled(false);
-        setData(userData.preferences.explored.jobs);
-        toast.success("Using cached jobs");
         toast.error("Failed to fetch new jobs");
         throw new Error("Failed to fetch new jobs");
       }
@@ -66,6 +60,7 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
         course.id = uuidv4();
       });
 
+      localStorage.setItem("jobs", JSON.stringify(result));
       setData(result);
       handleUpdateInfo(result);
 
@@ -120,7 +115,10 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
   }, [user, userData]);
 
   useEffect(() => {
-    if (userData) {
+    const cachedJobs = localStorage.getItem("jobs");
+    if (cachedJobs) {
+      setData(JSON.parse(cachedJobs));
+    } else if (userData) {
       searchJobs(
         `${userData.country} ${userData.userData.professionalDetails.specialty} linkedin jobs`
       );

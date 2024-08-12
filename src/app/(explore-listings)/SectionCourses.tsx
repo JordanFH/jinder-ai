@@ -42,10 +42,6 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
       if (!response.ok) {
         setLoading(false);
         setDisabled(false);
-        if (userData.preferences.explored.courses.length > 0) {
-          setData(userData.preferences.explored.courses);
-          toast.success("Using cached courses");
-        }
         toast.error("Failed to fetch new courses");
         throw new Error("Failed to fetch new courses");
       }
@@ -55,8 +51,6 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
       if (!success) {
         setLoading(false);
         setDisabled(false);
-        setData(userData.preferences.explored.courses);
-        toast.success("Using cached courses");
         toast.error("Failed to fetch new courses");
         throw new Error("Failed to fetch new courses");
       }
@@ -66,6 +60,7 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
         course.id = uuidv4();
       });
 
+      localStorage.setItem('courses', JSON.stringify(result));
       setData(result);
       handleUpdateInfo(result);
 
@@ -120,7 +115,10 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
   }, [user, userData]);
 
   useEffect(() => {
-    if (userData) {
+    const cachedCourses = localStorage.getItem("courses");
+    if (cachedCourses) {
+      setData(JSON.parse(cachedCourses));
+    } else if (userData) {
       searchCourses(
         `${userData.userData.professionalDetails.specialty} courses`
       );
