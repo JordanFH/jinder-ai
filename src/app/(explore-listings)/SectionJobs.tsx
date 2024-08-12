@@ -10,11 +10,11 @@ import { v4 as uuidv4 } from "uuid";
 import { getUserByEmail, updateUserByEmail } from "@/utils/userUtils";
 import toast from "react-hot-toast";
 
-export interface SectionCoursesProps {
+export interface SectionJobsProps {
   className?: string;
 }
 
-const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
+const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
@@ -141,6 +141,76 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
     return false;
   };
 
+  const handleSave = (data: any) => {
+    if (saved) {
+      getUserByEmail(user.email).then((user) => {
+        if (user) {
+          toast.loading("Saving...");
+          const newSaved = [...saved, data];
+
+          const updatedUser = {
+            ...user,
+            preferences: {
+              ...user.preferences,
+              saved: {
+                ...user.preferences.saved,
+                jobs: newSaved,
+              },
+            },
+          };
+
+          updateUserByEmail(user.email, updatedUser)
+            .then(() => {
+              setSaved(newSaved);
+              toast.dismiss();
+              toast.success("Saved successfully!");
+            })
+            .catch((error) => {
+              console.error("Error updating document: ", error);
+              toast.dismiss();
+              toast.error("Failed to save");
+            });
+        }
+      });
+    }
+  };
+
+  const handleRemove = (data: any) => {
+    if (saved) {
+      getUserByEmail(user.email).then((user) => {
+        if (user) {
+          toast.loading("Removing...");
+          const newSaved = saved.filter(
+            (item: any) => item.title !== data.title
+          );
+
+          const updatedUser = {
+            ...user,
+            preferences: {
+              ...user.preferences,
+              saved: {
+                ...user.preferences.saved,
+                jobs: newSaved,
+              },
+            },
+          };
+
+          updateUserByEmail(user.email, updatedUser)
+            .then(() => {
+              setSaved(newSaved);
+              toast.dismiss();
+              toast.success("Removed successfully!");
+            })
+            .catch((error) => {
+              console.error("Error updating document: ", error);
+              toast.dismiss();
+              toast.error("Failed to remove");
+            });
+        }
+      });
+    }
+  };
+
   return (
     <div
       className={`nc-SectionGridFilterCard ${className}`}
@@ -154,10 +224,8 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
             key={job.id}
             data={job}
             isLiked={handleExist(job.title)}
-            userData={userData}
-            saved={saved}
-            setSaved={setSaved}
-            isJob={true}
+            handleSave={handleSave}
+            handleRemove={handleRemove}
           />
         ))}
       </div>

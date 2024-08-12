@@ -141,6 +141,76 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
     return false;
   };
 
+  const handleSave = (data: any) => {
+    if (saved) {
+      getUserByEmail(user.email).then((user) => {
+        if (user) {
+          toast.loading("Saving...");
+          const newSaved = [...saved, data];
+
+          const updatedUser = {
+            ...user,
+            preferences: {
+              ...user.preferences,
+              saved: {
+                ...user.preferences.saved,
+                courses: newSaved,
+              },
+            },
+          };
+
+          updateUserByEmail(user.email, updatedUser)
+            .then(() => {
+              setSaved(newSaved);
+              toast.dismiss();
+              toast.success("Saved successfully!");
+            })
+            .catch((error) => {
+              console.error("Error updating document: ", error);
+              toast.dismiss();
+              toast.error("Failed to save");
+            });
+        }
+      });
+    }
+  };
+
+  const handleRemove = (data: any) => {
+    if (saved) {
+      getUserByEmail(user.email).then((user) => {
+        if (user) {
+          toast.loading("Removing...");
+          const newSaved = saved.filter(
+            (item: any) => item.title !== data.title
+          );
+
+          const updatedUser = {
+            ...user,
+            preferences: {
+              ...user.preferences,
+              saved: {
+                ...user.preferences.saved,
+                courses: newSaved,
+              },
+            },
+          };
+
+          updateUserByEmail(user.email, updatedUser)
+            .then(() => {
+              setSaved(newSaved);
+              toast.dismiss();
+              toast.success("Removed successfully!");
+            })
+            .catch((error) => {
+              console.error("Error updating document: ", error);
+              toast.dismiss();
+              toast.error("Failed to remove");
+            });
+        }
+      });
+    }
+  };
+
   return (
     <div
       className={`nc-SectionGridFilterCard ${className}`}
@@ -154,9 +224,8 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
             key={course.id}
             data={course}
             isLiked={handleExist(course.title)}
-            userData={userData}
-            saved={saved}
-            setSaved={setSaved}
+            handleSave={handleSave}
+            handleRemove={handleRemove}
           />
         ))}
       </div>
