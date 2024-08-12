@@ -2,7 +2,6 @@
 
 import CommentListing from "@/components/CommentListing";
 import React, { FC } from "react";
-import ButtonSecondary from "@/shared/ButtonSecondary";
 import Image from "next/image";
 import gemini_logo from "@/images/Google_Gemini.svg";
 import Input from "@/shared/Input";
@@ -35,6 +34,7 @@ const ChatPage: FC<ChatPageProps> = ({}) => {
         {/* comment */}
         <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
           <CommentListing className="pb-8" />
+          <CommentListing isGemini={false} className="pb-8" />
           <form className="mt-10 relative">
             <Input
               placeholder="Send message"
