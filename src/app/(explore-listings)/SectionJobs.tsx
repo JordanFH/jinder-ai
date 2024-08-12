@@ -42,8 +42,10 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
       if (!response.ok) {
         setLoading(false);
         setDisabled(false);
-        toast.error("Failed to fetch jobs");
-        throw new Error("Failed to fetch jobs");
+        setData(userData.preferences.explored.jobs);
+        toast.success("Using cached jobs");
+        toast.error("Failed to fetch new jobs");
+        throw new Error("Failed to fetch new jobs");
       }
 
       let { success, result } = await response.json();
@@ -51,8 +53,10 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
       if (!success) {
         setLoading(false);
         setDisabled(false);
-        toast.error("Failed to fetch jobs");
-        throw new Error("Failed to fetch jobs");
+        setData(userData.preferences.explored.jobs);
+        toast.success("Using cached jobs");
+        toast.error("Failed to fetch new jobs");
+        throw new Error("Failed to fetch new jobs");
       }
 
       // add id to each course

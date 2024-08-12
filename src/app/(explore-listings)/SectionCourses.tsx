@@ -42,8 +42,10 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
       if (!response.ok) {
         setLoading(false);
         setDisabled(false);
-        toast.error("Failed to fetch courses");
-        throw new Error("Failed to fetch courses");
+        setData(userData.preferences.explored.courses);
+        toast.success("Using cached courses");
+        toast.error("Failed to fetch new courses");
+        throw new Error("Failed to fetch new courses");
       }
 
       let { success, result } = await response.json();
@@ -51,8 +53,10 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
       if (!success) {
         setLoading(false);
         setDisabled(false);
-        toast.error("Failed to fetch courses");
-        throw new Error("Failed to fetch courses");
+        setData(userData.preferences.explored.courses);
+        toast.success("Using cached courses");
+        toast.error("Failed to fetch new courses");
+        throw new Error("Failed to fetch new courses");
       }
 
       // add id to each course
