@@ -70,15 +70,17 @@ const FileUpload: FC<Props> = ({
               },
               body: JSON.stringify({ user_id: uuidv4(), file: base64 }),
             });
+            toast.dismiss();
 
             if (!response.ok) {
+              toast.error("Failed to fetch CV data");
               throw new Error("Failed to fetch CV data");
             }
-            toast.dismiss();
 
             let { success, result } = await response.json();
 
             if (!success) {
+              toast.error("Failed to fetch CV data");
               throw new Error("Failed to fetch CV data");
             }
 
@@ -94,9 +96,11 @@ const FileUpload: FC<Props> = ({
         };
       } else {
         setError("File size exceeds 5MB limit.");
+        toast.error("File size exceeds 5MB limit.");
       }
     } else {
       setError("Only PDF files are allowed.");
+      toast.error("Only PDF files are allowed.");
     }
   };
 

@@ -8,6 +8,7 @@ import Textarea from "@/shared/Textarea";
 import FileUpload from "@/components/FileUpload";
 import { useUser } from "@/providers/UserProvider";
 import { updateUserByEmail } from "@/utils/userUtils";
+import toast from "react-hot-toast";
 
 export interface AccountPageProps {}
 
@@ -62,6 +63,7 @@ const AccountPage = () => {
   const handleUpdateInfo = () => {
     setLoading(true);
     setDisabled(true);
+    toast.loading("Updating info...");
 
     const updatedUser = {
       ...user,
@@ -86,11 +88,15 @@ const AccountPage = () => {
       .then(() => {
         setLoading(false);
         setDisabled(false);
+        toast.dismiss();
+        toast.success("Info updated successfully!");
       })
       .catch((error) => {
         console.error("Error updating document: ", error);
         setLoading(false);
         setDisabled(false);
+        toast.dismiss();
+        toast.error("Failed to update info.");
       });
   };
 
