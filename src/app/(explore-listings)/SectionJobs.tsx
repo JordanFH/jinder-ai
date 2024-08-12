@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, use, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Heading2 from "@/shared/Heading2";
 import CarCard from "@/components/CarCard";
 import { useUser } from "@/providers/UserProvider";
@@ -121,11 +121,25 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
     }
   }, [userData]);
 
-  // useEffect(() => {
-  //   if (userData && userData.preferences.explored.jobs.length > 0) {
-  //     setData(userData.preferences.explored.jobs);
-  //   }
-  // }, [data, userData]);
+  const [saved, setSaved] = useState<any>(null);
+
+  useEffect(() => {
+    if (!saved) {
+      getUserByEmail(user.email).then((user) => {
+        if (user) {
+          const { jobs } = user.preferences.saved;
+          setSaved(jobs);
+        }
+      });
+    }
+  }, [user, saved]);
+
+  const handleExist = (title: string) => {
+    if (saved) {
+      return saved.some((item: any) => item.title === title);
+    }
+    return false;
+  };
 
   return (
     <div
@@ -135,8 +149,16 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
       <Heading2 heading="Jobs" subHeading="Recommended jobs for you" />
 
       <div className="grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {data.map((course) => (
-          <CarCard key={course.id} data={course} />
+        {data.map((job) => (
+          <CarCard
+            key={job.id}
+            data={job}
+            isLiked={handleExist(job.title)}
+            userData={userData}
+            saved={saved}
+            setSaved={setSaved}
+            isJob={true}
+          />
         ))}
       </div>
       {data.length === 0 && (

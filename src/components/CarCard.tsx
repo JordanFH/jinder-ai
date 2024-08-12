@@ -1,12 +1,18 @@
 import React, { FC } from "react";
 import BtnLikeIcon from "@/components/BtnLikeIcon";
 import Image from "next/image";
+import toast from "react-hot-toast";
+import { updateUserByEmail } from "@/utils/userUtils";
 
 export interface CarCardProps {
   className?: string;
   data?: any;
   size?: "default" | "small";
   isLiked?: boolean;
+  userData?: any;
+  saved?: any[];
+  setSaved?: (values: any[]) => void;
+  isJob?: boolean;
 }
 
 const CarCard: FC<CarCardProps> = ({
@@ -14,7 +20,101 @@ const CarCard: FC<CarCardProps> = ({
   className = "",
   data = {},
   isLiked = false,
+  userData,
+  saved = [],
+  setSaved = () => {},
+  isJob = false,
 }) => {
+  const handleSave = () => {
+    if (saved) {
+      toast.loading("Saving...");
+      const newSaved = [...saved, data];
+
+      let updatedUser = null;
+
+      if (isJob) {
+        updatedUser = {
+          ...userData,
+          preferences: {
+            ...userData.preferences,
+            saved: {
+              ...userData.preferences.saved,
+              jobs: newSaved,
+            },
+          },
+        };
+      } else {
+        updatedUser = {
+          ...userData,
+          preferences: {
+            ...userData.preferences,
+            saved: {
+              ...userData.preferences.saved,
+              courses: newSaved,
+            },
+          },
+        };
+      }
+
+      updateUserByEmail(userData.email, updatedUser)
+        .then(() => {
+          setSaved(newSaved);
+          toast.dismiss();
+          toast.success("Saved successfully!");
+        })
+        .catch((error) => {
+          console.error("Error updating document: ", error);
+          toast.dismiss();
+          toast.error("Failed to save");
+        });
+    }
+  };
+
+  const handleRemove = () => {
+    if (saved) {
+      toast.loading("Removing...");
+      const newSaved = saved.filter((item) => item.title !== data.title);
+
+      let updatedUser = null;
+
+      if (isJob) {
+        updatedUser = {
+          ...userData,
+          preferences: {
+            ...userData.preferences,
+            saved: {
+              ...userData.preferences.saved,
+              jobs: newSaved,
+            },
+          },
+        };
+      } else {
+        updatedUser = {
+          ...userData,
+          preferences: {
+            ...userData.preferences,
+            saved: {
+              ...userData.preferences.saved,
+              courses: newSaved,
+            },
+          },
+        };
+      }
+
+      updateUserByEmail(userData.email, updatedUser)
+        .then(() => {
+          setSaved(newSaved);
+          toast.dismiss();
+          toast.success("Removed successfully!");
+        })
+        .catch((error) => {
+          console.error("Error updating document: ", error);
+          toast.dismiss();
+          toast.error("Failed to remove");
+        });
+    }
+  };
+
   const renderSliderGallery = () => {
     return (
       <div className="relative w-full rounded-2xl overflow-hidden">
@@ -26,12 +126,15 @@ const CarCard: FC<CarCardProps> = ({
                 ? data.pagemap
                 : "https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2023/02/how-to-create-online-course.webp"
             }
-            alt="course"
+            alt={data.title}
             sizes="(max-width: 640px) 100vw, 350px"
           />
         </div>
         <BtnLikeIcon
           isLiked={isLiked}
+          onClick={() => {
+            isLiked ? handleRemove() : handleSave();
+          }}
           className="absolute right-3 top-3 z-[1]"
         />
       </div>
