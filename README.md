@@ -29,6 +29,13 @@ Welcome to **JinderAI**, the smart solution that revolutionizes your job and cou
 4. Run the development server using `npm run dev` or `yarn dev`.
 5. Explore the documentation for more details.
 
+## 📂 Related Repositories
+
+JinderAI is part of a larger ecosystem, powered by advanced AI technology. Check out these related repositories to explore more about the project:
+
+- [API-JINDER-CV](https://github.com/JhazHC/API-JINDER-CV): This service analyzes CVs, extracting relevant data and seamlessly integrating it into the JinderAI platform.
+- [API-JINDER-GOOGLE](https://github.com/JhazHC/API-JINDER-GOOGLE): Powered by Gemini AI, this component drives the intelligent search engine, offering personalized job and course recommendations tailored to user profiles. The chatbot uses this engine to answer user queries and suggest relevant opportunities.
+
 ## 🙏 Acknowledgements
 
 A big shoutout to all the libraries, plugins, and assets that made this project possible, and to the advanced AI technology, Gemini, for powering JinderAI.

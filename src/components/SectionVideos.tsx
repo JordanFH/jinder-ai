@@ -19,7 +19,7 @@ export interface SectionVideosProps {
 
 const VIDEOS_DEMO: VideoType[] = [
   {
-    id: "Ao7e4iisKMs",
+    id: "NvHpwX1TQXg",
     title: "JinderAI",
     thumbnail:
       "https://drive.google.com/thumbnail?id=1Cw6a8WtTEfFBw4TCwnCslA2DWBHAkyqw&sz=w2560",
