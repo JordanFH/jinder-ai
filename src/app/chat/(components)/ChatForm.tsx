@@ -72,6 +72,7 @@ const ChatForm: FC<ChatPageProps> = ({}) => {
         };
       });
 
+      localStorage.setItem("chatHistory", JSON.stringify(filteredChatHistory));
       handleUpdateInfo(filteredChatHistory);
       // setChatHistory(filteredChatHistory);
       setMessage("");
@@ -146,6 +147,10 @@ const ChatForm: FC<ChatPageProps> = ({}) => {
           if (docSnapshot.exists()) {
             const data = docSnapshot.data();
             if (data.preferences && data.preferences.chat_history) {
+              localStorage.setItem(
+                "chatHistory",
+                JSON.stringify(data.preferences.chat_history)
+              );
               setChatHistory(data.preferences.chat_history);
             }
           }
@@ -156,6 +161,13 @@ const ChatForm: FC<ChatPageProps> = ({}) => {
       );
 
       return () => unsubscribe();
+    }
+  }, [userData]);
+
+  useEffect(() => {
+    const cachedChats = localStorage.getItem("chatHistory");
+    if (cachedChats) {
+      setChatHistory(JSON.parse(cachedChats));
     }
   }, [userData]);
 

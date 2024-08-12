@@ -7,12 +7,14 @@ export interface CommentListingProps {
   className?: string;
   message?: string;
   isGemini?: boolean;
+  hasListingTitle?: boolean;
 }
 
 const CommentListing: FC<CommentListingProps> = ({
   className = "",
   message = "",
   isGemini = true,
+  hasListingTitle,
 }) => {
   const user = useUser();
 
@@ -53,7 +55,7 @@ const CommentListing: FC<CommentListingProps> = ({
           } space-x-3`}
         >
           <div className="flex flex-col">
-            <div className="text-sm font-semibold">
+            <div className="text-sm font-semibold pt-3">
               <span>{isGemini ? "Gemini AI" : "You"}</span>
             </div>
           </div>

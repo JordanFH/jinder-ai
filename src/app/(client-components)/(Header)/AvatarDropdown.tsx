@@ -128,6 +128,9 @@ export default function AvatarDropdown({
                         signOut({
                           callbackUrl: "/",
                         });
+                        localStorage.removeItem("jobs");
+                        localStorage.removeItem("courses");
+                        localStorage.removeItem("chatHistory");
                         close();
                       }}
                     >
