@@ -23,7 +23,7 @@ const ChatPage: FC<ChatPageProps> = ({}) => {
 
   const user = useUser();
 
-  const sendMessage = async (query: any) => {    
+  const sendMessage = async (query: any) => {
     setLoading(true);
     setDisabled(true);
     toast.loading("Sending message...");
@@ -54,14 +54,30 @@ const ChatPage: FC<ChatPageProps> = ({}) => {
         toast.error("Failed to send message");
         throw new Error("Failed to send message");
       }
+      
+      const filteredChatHistory = result.chatHistory.map((item: any) => {
+        const searchText = "The user wants to tell you: ";
+        const index = item.text.indexOf(searchText);
 
-      localStorage.setItem("chatHistory", JSON.stringify(result));
-      // setChatHistory(result.chatHistory);
-      handleUpdateInfo(result.chatHistory);
+        // Si el texto existe en la cadena, extraer todo después de este
+        const newText =
+          index !== -1
+            ? item.text.substring(index + searchText.length)
+            : item.text;
 
+        // Devolver el objeto modificado
+        return {
+          ...item,
+          text: newText,
+        };
+      });
+
+      handleUpdateInfo(filteredChatHistory);
+      // setChatHistory(filteredChatHistory);
+      setMessage("");
       setLoading(false);
       setDisabled(false);
-      toast.success("Courses generated successfully!");
+      toast.success("Message sent successfully!");
     } catch (error) {
       console.error(error);
     }
@@ -100,7 +116,7 @@ const ChatPage: FC<ChatPageProps> = ({}) => {
     };
 
     if (message) {
-      sendMessage({data});
+      sendMessage({ data });
     }
   };
 
@@ -166,7 +182,7 @@ const ChatPage: FC<ChatPageProps> = ({}) => {
 
         {/* comment */}
         <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
-          {chatHistory.map((data: any, index: number) => (
+          {chatHistory?.map((data: any, index: number) => (
             <CommentListing
               key={index}
               message={data.text}
@@ -174,12 +190,15 @@ const ChatPage: FC<ChatPageProps> = ({}) => {
               className="pb-8"
             />
           ))}
-          <form className={`relative ${chatHistory.length > 0 ? "mt-10" : ""}`}>
+          <form
+            className={`relative ${chatHistory?.length > 0 ? "mt-10" : ""}`}
+          >
             <Input
               placeholder="Send message"
               type="email"
               rounded="rounded-full"
               sizeClass="h-12 px-5 py-3"
+              value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
             <ButtonCircle
