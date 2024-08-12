@@ -6,10 +6,11 @@ import Image from "next/image";
 import gemini_logo from "@/images/Google_Gemini.svg";
 import Input from "@/shared/Input";
 import ButtonCircle from "@/shared/ButtonCircle";
-import { getUserByEmail } from "@/utils/userUtils";
+import { getUserByEmail, updateUserByEmail } from "@/utils/userUtils";
 import { useUser } from "@/providers/UserProvider";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "@/firebase/config";
+import toast from "react-hot-toast";
 
 export interface ChatPageProps {}
 
@@ -18,8 +19,90 @@ const ChatPage: FC<ChatPageProps> = ({}) => {
   const [disabled, setDisabled] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [chatHistory, setChatHistory] = useState([]);
+  const [message, setMessage] = useState("");
 
   const user = useUser();
+
+  const sendMessage = async (query: any) => {    
+    setLoading(true);
+    setDisabled(true);
+    toast.loading("Sending message...");
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(query),
+      });
+
+      toast.dismiss();
+
+      if (!response.ok) {
+        setLoading(false);
+        setDisabled(false);
+        toast.error("Failed to send message");
+        throw new Error("Failed to send message");
+      }
+
+      let { success, result } = await response.json();
+
+      if (!success) {
+        setLoading(false);
+        setDisabled(false);
+        toast.error("Failed to send message");
+        throw new Error("Failed to send message");
+      }
+
+      localStorage.setItem("chatHistory", JSON.stringify(result));
+      // setChatHistory(result.chatHistory);
+      handleUpdateInfo(result.chatHistory);
+
+      setLoading(false);
+      setDisabled(false);
+      toast.success("Courses generated successfully!");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleUpdateInfo = (data: any) => {
+    const updatedUser = {
+      ...userData,
+      preferences: {
+        ...userData.preferences,
+        chat_history: data,
+      },
+    };
+
+    updateUserByEmail(userData.email, updatedUser)
+      .then(() => {
+        setLoading(false);
+        setDisabled(false);
+      })
+      .catch((error) => {
+        console.error("Error updating document: ", error);
+        setLoading(false);
+        setDisabled(false);
+      });
+  };
+
+  const handleSendMessage = (e: any) => {
+    e.preventDefault();
+
+    const data = {
+      userData: userData.userData,
+      chat: {
+        chatHistory: chatHistory.length > 0 ? chatHistory : null,
+        message,
+      },
+    };
+
+    if (message) {
+      sendMessage({data});
+    }
+  };
 
   useEffect(() => {
     if (!userData) {
@@ -83,19 +166,27 @@ const ChatPage: FC<ChatPageProps> = ({}) => {
 
         {/* comment */}
         <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
-          <CommentListing message="Hola" isGemini={false} className="pb-8" />
-          <CommentListing message="como estas" className="pb-8" />
-          <form className="mt-10 relative">
+          {chatHistory.map((data: any, index: number) => (
+            <CommentListing
+              key={index}
+              message={data.text}
+              isGemini={data.role === "model" ? true : false}
+              className="pb-8"
+            />
+          ))}
+          <form className={`relative ${chatHistory.length > 0 ? "mt-10" : ""}`}>
             <Input
               placeholder="Send message"
               type="email"
               rounded="rounded-full"
               sizeClass="h-12 px-5 py-3"
+              onChange={(e) => setMessage(e.target.value)}
             />
             <ButtonCircle
               type="submit"
               className="absolute transform top-1/2 -translate-y-1/2 right-1.5"
               size="w-10 h-10"
+              onClick={handleSendMessage}
             >
               <i className="las la-arrow-right text-xl"></i>
             </ButtonCircle>
