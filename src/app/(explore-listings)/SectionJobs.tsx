@@ -8,6 +8,7 @@ import Link from "next/link";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import { v4 as uuidv4 } from "uuid";
 import { getUserByEmail, updateUserByEmail } from "@/utils/userUtils";
+import toast from "react-hot-toast";
 
 export interface SectionCoursesProps {
   className?: string;
@@ -25,6 +26,7 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
   const searchJobs = async (query: any) => {
     setLoading(true);
     setDisabled(true);
+    toast.loading("Generating new jobs...");
 
     try {
       const response = await fetch("/api/search", {
@@ -35,13 +37,17 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
         body: JSON.stringify({ query }),
       });
 
+      toast.dismiss();
+
       if (!response.ok) {
+        toast.error("Failed to fetch jobs");
         throw new Error("Failed to fetch jobs");
       }
 
       let { success, result } = await response.json();
 
       if (!success) {
+        toast.error("Failed to fetch jobs");
         throw new Error("Failed to fetch jobs");
       }
 
@@ -55,6 +61,7 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
 
       setLoading(false);
       setDisabled(false);
+      toast.success("Jobs generated successfully!");
     } catch (error) {
       console.error(error);
     }
