@@ -1,8 +1,7 @@
 import React, { FC } from "react";
 import BtnLikeIcon from "@/components/BtnLikeIcon";
 import Image from "next/image";
-import toast from "react-hot-toast";
-import { updateUserByEmail } from "@/utils/userUtils";
+import gemini_logo from "@/images/Google_Gemini.svg";
 
 export interface CarCardProps {
   className?: string;
@@ -25,7 +24,6 @@ const CarCard: FC<CarCardProps> = ({
   handleSave = () => {},
   handleRemove = () => {},
 }) => {
-  
   const renderSliderGallery = () => {
     return (
       <div className="relative w-full rounded-2xl overflow-hidden">
@@ -54,11 +52,17 @@ const CarCard: FC<CarCardProps> = ({
 
   const renderContent = () => {
     return (
-      <div className={size === "default" ? "p-5  space-y-4" : "p-3  space-y-2"}>
-        <div className="space-y-2">
+      <div
+        className={
+          size === "default"
+            ? "p-5 flex flex-col justify-between space-y-4 min-h-[250px]"
+            : "p-3 flex flex-col justify-between space-y-2 min-h-[200px]"
+        }
+      >
+        <div className="space-y-2 overflow-auto">
           <div className="flex items-center space-x-2">
             <h2
-              className={`  capitalize ${
+              className={`capitalize ${
                 size === "default"
                   ? "text-xl font-semibold"
                   : "text-base font-medium"
@@ -71,7 +75,14 @@ const CarCard: FC<CarCardProps> = ({
             {data.snippet}
           </div>
         </div>
-        <div className="flex w-full justify-end items-end">
+        <div className="flex w-full justify-between">
+          <span className="flex items-center">
+            <Image
+              src={gemini_logo}
+              alt="Gemini"
+              height={21.5}
+            />
+          </span>
           <a
             href={data.link}
             target="_blank"
