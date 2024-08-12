@@ -6,6 +6,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useUser } from "@/providers/UserProvider";
 import { getUserByEmail, updateUserByEmail } from "@/utils/userUtils";
 import toast from "react-hot-toast";
+import ButtonPrimary from "@/shared/ButtonPrimary";
 
 const AccountSavelists = () => {
   const user = useUser();
@@ -219,6 +220,14 @@ const AccountSavelists = () => {
                     />
                   ))}
                 </div>
+                {savedJobs?.length === 0 && (
+                  <p className="w-100 text-center">
+                    <span className="block mb-6">
+                      You haven't saved any jobs yet.
+                    </span>
+                    <ButtonPrimary href="/explore">Explore jobs</ButtonPrimary>
+                  </p>
+                )}
               </Tab.Panel>
               <Tab.Panel className="mt-8">
                 <div className="grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -232,6 +241,16 @@ const AccountSavelists = () => {
                     />
                   ))}
                 </div>
+                {savedCourses?.length === 0 && (
+                  <p className="w-100 text-center">
+                    <span className="block mb-6">
+                      You haven't saved any courses yet.
+                    </span>
+                    <ButtonPrimary href="/explore">
+                      Explore courses
+                    </ButtonPrimary>
+                  </p>
+                )}
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
