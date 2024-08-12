@@ -33,8 +33,8 @@ const ChatPage: FC<ChatPageProps> = ({}) => {
 
         {/* comment */}
         <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
-          <CommentListing className="pb-8" />
-          <CommentListing isGemini={false} className="pb-8" />
+          <CommentListing message="Hola" isGemini={false} className="pb-8" />
+          <CommentListing message="como estas" className="pb-8" />
           <form className="mt-10 relative">
             <Input
               placeholder="Send message"

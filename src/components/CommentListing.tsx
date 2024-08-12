@@ -1,46 +1,36 @@
 import React, { FC } from "react";
 import Avatar from "@/shared/Avatar";
 import gemini_icon from "@/images/Google_Gemini_Icon.svg";
-
-interface CommentListingDataType {
-  name: string;
-  avatar?: string;
-  date: string;
-  comment: string;
-  starPoint: number;
-}
+import { useUser } from "@/providers/UserProvider";
 
 export interface CommentListingProps {
   className?: string;
-  data?: CommentListingDataType;
+  message?: string;
   isGemini?: boolean;
 }
 
-const DEMO_DATA: CommentListingDataType = {
-  name: "Cody Fisher",
-  date: "May 20, 2021",
-  comment:
-    "There’s no stopping the tech giant. Apple now opens its 100th store in China.There’s no stopping the tech giant.",
-  starPoint: 5,
-};
-
 const CommentListing: FC<CommentListingProps> = ({
   className = "",
-  data = DEMO_DATA,
+  message = "",
   isGemini = true,
 }) => {
+  const user = useUser();
+
   const directionClasses = !isGemini
     ? "justify-end text-right"
     : "justify-start text-left";
 
   return (
     <div
-      className={`nc-CommentListing flex ${directionClasses} ${className}`}
+      className={`nc-CommentListing flex ${directionClasses} ${className} ${
+        isGemini
+          ? "bg-primary-200 dark:bg-primary-900"
+          : "bg-neutral-200 dark:bg-neutral-800"
+      }`}
       data-nc-id="CommentListing"
       style={{
         maxWidth: "80%",
         margin: !isGemini ? "0 0 10px auto" : "0 auto 10px 0",
-        backgroundColor: !isGemini ? "#f0f0f0" : "#d1ecf1",
         borderRadius: "15px",
         padding: "10px",
         boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
@@ -64,12 +54,12 @@ const CommentListing: FC<CommentListingProps> = ({
         >
           <div className="flex flex-col">
             <div className="text-sm font-semibold">
-              <span>{data.name}</span>
+              <span>{isGemini ? "Gemini AI" : user.name}</span>
             </div>
           </div>
         </div>
         <span className="block mt-3 text-neutral-600 dark:text-neutral-300">
-          {data.comment}
+          {message}
         </span>
       </div>
       {!isGemini && (
@@ -77,8 +67,8 @@ const CommentListing: FC<CommentListingProps> = ({
           <Avatar
             sizeClass="h-10 w-10 text-lg"
             radius="rounded-full"
-            userName={data.name}
-            imgUrl={data.avatar}
+            userName={user.name}
+            imgUrl={user.image}
           />
         </div>
       )}
