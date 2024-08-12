@@ -42,8 +42,10 @@ const SectionGridFilterCard: FC<SectionJobsProps> = ({ className = "" }) => {
       if (!response.ok) {
         setLoading(false);
         setDisabled(false);
-        setData(userData.preferences.explored.jobs);
-        toast.success("Using cached jobs");
+        if (userData.preferences.explored.jobs.length > 0) {
+          setData(userData.preferences.explored.jobs);
+          toast.success("Using cached jobs");
+        }
         toast.error("Failed to fetch new jobs");
         throw new Error("Failed to fetch new jobs");
       }

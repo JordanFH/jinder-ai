@@ -42,8 +42,10 @@ const SectionGridFilterCard: FC<SectionCoursesProps> = ({ className = "" }) => {
       if (!response.ok) {
         setLoading(false);
         setDisabled(false);
-        setData(userData.preferences.explored.courses);
-        toast.success("Using cached courses");
+        if (userData.preferences.explored.courses.length > 0) {
+          setData(userData.preferences.explored.courses);
+          toast.success("Using cached courses");
+        }
         toast.error("Failed to fetch new courses");
         throw new Error("Failed to fetch new courses");
       }
